@@ -8,7 +8,7 @@
 - 6:35-7pm: Instructions
 - 7-8:20pm: Hands-On Activity
 - 8:20-8:30pm: Wrap-up, reflection, next steps
-- 8:30-9pm: Clean up
+- 8:30-9pm: Clean up 
 
 ## Class Format
 - Break students into groups of 4-5
