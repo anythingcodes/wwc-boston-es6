@@ -24,7 +24,7 @@
 4. Struggles with `this` -> Arrow functions
     - Demo how arrow functions help solve the [button increment issue](https://codepen.io/anythingcodes/pen/LyZwRr)
 5. Array helpers
-    - Mention all, but give demo for find, map, and forEach
+    - Mention all, but give demo for find, map, forEach, and reduce
     - Trivia questions for email client functionality (?)
 6. Function parameters
     - Discuss enforcing mandatory parameters (?)
@@ -51,5 +51,5 @@
 - Default parameters
     - Enforcing mandatory parameters
 - Template strings
-- Common array helpers (find, map, forEach)
+- Common array helpers (find, map, forEach, perhaps the less well-known reduce)
 - Fetch helper
