@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Getting Started with ES6 and ES7 JavaScript</title>
+
+    <meta name="description" content="Materials and slides for a Girl Develop It ES6 JavaScript course. Includes ES7's minor additions.">
+    <meta name="author" content="Girl Develop It">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="dist/css/reveal.css">
+    <link rel="stylesheet" href="dist/css/gdidarkblue.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- light editor --><link rel="stylesheet" href="dist/css/light.css">
+    <!-- dark editor <link rel="stylesheet" href="dist/css/dark.css">-->
+    <!-- <link rel="stylesheet" href="dist/css/zenburn.css"> -->
+
+    <link rel="stylesheet" href="plugin/accessibility-helper/css/accessibility-helper.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'dist/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!-- If use the PDF print sheet so students can print slides-->
+
+    <link rel="stylesheet" href="dist/css/print/pdf.css" type="text/css" media="print">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script src="dist/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body spellcheck="false">
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <!-- Opening -->
+        <section class="small">
+            <h1>Getting Started with ES6 and ES7 JavaScript</h1>
+            <img src="dist/img/es6-gdi.jpg" alt="ES6 and ES7 Intro Image" class="noborder"/>
+            <h2 class="green">Class 2</h2>
+        </section>
+
+        <section>
+            <h2>Today's Topics</h2>
+            <ul>
+                <li>Review at-home challenge from last class</li>
+                <li>Arrow Functions</li>
+                <li>Arrow Functions and <code>this</code></li>
+                <li>Array Helpers</li>
+                <li>Altering Arrays</li>
+            </ul>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>Review</h2>
+            <h3>Fruit Basket</h3>
+            <div class="small clear">
+                <div class="halfblock">
+							<pre><code contenteditable class ="javascript" >var fruit = 'apple';
+
+(function basket(){
+    var fruit = 'banana';
+    console.log(fruit);
+})();
+
+console.log(fruit);
+
+var fruitBasket = {
+    fruit: 'mango',
+    getFruit: function(){
+      console.log(fruit);
+      fruit = 'orange';
+    }
+};
+fruitBasket.getFruit();
+console.log(fruit);</code></pre>
+                    <a href="https://codepen.io/anythingcodes/pen/rmgNEb?editors=0012" target="_blank">View on CodePen &raquo;</a>
+                </div>
+                <div class="halfblock">
+                    <p>What would the following output to the console and why?</p>
+                    <div class="fragment" style="background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Answer:</strong> <pre class="javascript"><code>banana
+apple
+apple
+orange</code></pre>
+
+
+                    </div>
+                    <a class="fragment" target="_blank" href="http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/">Understand JavaScript's <code>this</code> with clarity, and master it &raquo;</a>
+                </div>
+            </div>
+
+            <aside class="notes">Go through the solution step by step by drawing a table on the board <a href="../../dist/img/fruit-basket-solution.png">that looks like this</a>. One column should be <code>Scopes</code> and the other should be <code>Output</code>. Within <code>Scopes</code>, you'll label the global `fruit` variable and the IIFE `fruit` variable and show how those variables change over time (global will change from apple to orange, while IIFE will only be banana). Walk students through the code, pointing to where different scopes' variables are assigned. More info on <code>this</code>: When a function is called as a method of an object, its <code>this</code> is set to the object the method is called on. Point out the article.
+            </aside>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Arrow Functions</h1>
+        </section>
+
+        <section>
+            <h2>Arrow Functions</h2>
+            <div class="clear">
+                <div class="halfblock">
+                    <h3 class="green">ES5</h3>
+                    <pre><code contenteditable class ="javascript">var getMessage = function(name) {
+  return 'Hello ' + name + '!';
+}								</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6</h3>
+                    <pre><code contenteditable class ="javascript">const getMessage = name => `Hello ${name}!`;</code></pre>
+                </div>
+
+            </div>
+            <div class="clear small">
+
+                <div class="halfblock">
+                    <h3 class="fragment">Making an arrow function:</h3>
+                    <ol>
+                        <li class="fragment">Remove the word <code>function</code></li>
+                        <li class="fragment">Place a fat arrow (<code>=></code>) after parameters</li>
+                    </ol>
+                </div>
+                <div class="halfblock">
+                    <h3 class="blue fragment">Trimming it down:</h3>
+                    <ul>
+                        <li class="fragment">If there's only <span class="green">one parameter</span>, remove the surrounding parentheses <code>()</code></li>
+                        <li class="fragment">If there's only <span class="green">one expression</span> in the function body, remove <code>{ }</code> and <code>return</code> (<span class="orange">implicit return</span>)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <aside class="notes">
+                <ul>
+                    <li>Refactor ES5 version in front of students. Ask about <code>const</code> and template strings</li>
+                    <li>Skinny arrow is <code>-></code> like in Ruby and Coffeescript</li>
+                    <li>If there are zero or more than one args, you need to include parentheses, e.g. <code>const sum = () => retVal;</code></li>
+                </ul>
+
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <h3>Writing arrow functions</h3>
+            <p>Refactor the following code to use arrow functions.</p>
+
+            <div class="clear" style="min-height:300px;">
+                <div class="halfblock">
+                    <h6 class="light">Activity 1</h6>
+                    <p data-height="200" data-theme-id="0" data-slug-hash="dWwdLM" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow Function Exercise #1" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/dWwdLM/">Arrow Function Exercise #1</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/NjeymY?editors=0010" target="_blank">View Solution</a>
+                    </div>
+                </div>
+                <div class="halfblock">
+                    <h6 class="light">Activity 2</h6>
+                    <p data-height="200" data-theme-id="0" data-slug-hash="mmBZYo" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow functions" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/mmBZYo/">Arrow functions</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/JNwpqd?editors=0010#0" target="_blank">View Solution</a>
+                    </div>
+                </div>
+            </div>
+            <aside class="notes">
+                Activity 2 is a common interview question
+            </aside>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3em;">Arrow Functions and <code>this</code></h1>
+        </section>
+
+        <section>
+            <h2>The <code>this</code> keyword</h2>
+            <p>The <code>this</code> keyword determines context</p>
+            <pre class="small"><code class="javascript" contenteditable>const obj = {
+  name: 'Zeta',
+  getName: function() {
+    console.log(this.name);
+  }
+};
+
+obj.getName(); // Zeta</code></pre>
+            <aside class="notes">
+                We saw the <code>this</code> keyword earlier with Fruit Baskets. Seems straightforward when you have a smaller codebase and more simple objects, but when you introduce multiple scopes and functions it quickly spirals out of control.
+            </aside>
+        </section>
+
+        <section>
+            <h2>There's <code>this</code> One Problem</h2>
+
+            <p class="fragment">Binding and changing <code>this</code> in functions is one of the most common JavaScript errors</p>
+
+            <div class="fragment clear" style="margin-top:.5em;">
+                <p><img src="dist/img/computer-frustration.gif" alt="Computer frustration" class="right" />It's possible to mistakenly affect one object when you meant to affect another</p>
+
+                <p class="fragment"><a href="https://twitter.com/bendhalpern/status/578925947245633536" target="_blank"><img src="dist/img/this-tweet-joke.png" alt="JavaScript `this` tweet by Ben Halpern" /></a></p>
+            </div>
+
+            <!--<p class="fragment"><a href="https://codepen.io/anythingcodes/pen/BRvYQp/?editors=0010" target="_blank">Let's take a look &raquo;</a></p>-->
+
+            <aside class="notes">Ask students what the output to console be when obj.getName() is called? This is straightforward with a small codebase but it quickly spirals out of control with nested functions.</aside>
+        </section>
+
+        <section>
+            <h2>What is <code>this</code> problem?</h2>
+
+            <h3>Let's take a look</h3>
+            <div style="min-height:200px;" class="fragment">
+                <p data-height="200" data-theme-id="0" data-slug-hash="qmPGJN" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow functions and `this`" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/qmPGJN/">Arrow functions and `this`</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/QvqReo?editors=0010#0" target="_blank">View Solution</a>
+
+            </div>
+
+            <aside class="notes">
+                <ul>
+                    <li>Ask students: What would you expect to happen?</li>
+                    <li>Ask students: What are some ways around the problem that you've seen?</li>
+                    <li>Refer to it as 'the this keyword' and then 'the keyword' going forward</li>
+                    <li>The call to this.logEvent() is broken because <code>this</code> is a reference to the object that was the target of the event (<code>document</code>)</li>
+                    <li>Ask students to transform existing code to arrow function per earlier steps
+                        <ul>
+                            <li>Can fix by binding <code>this</code> to logEvent(), but this creates a new function whose <code>this</code> is bound to the current <code>this</code>.</li>
+                            <li>Could also declare <code>var self = this;</code></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Can arrow functions help?</h2>
+
+            <ul>
+                <li class="fragment">Arrow functions <span class="green">do not have a <code>this</code> 🌟</li>
+                <li class="fragment">The value of <code>this</code> is <span class="orange">lexically fetched</span> from the scope the arrow function sits inside</li>
+            </ul>
+            <div style="min-height:200px;" class="fragment">
+                <p data-height="200" data-theme-id="0" data-slug-hash="qmPGJN" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow functions and `this`" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/qmPGJN/">Arrow functions and `this`</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/QvqReo?editors=0010#0" target="_blank">View Solution</a>
+
+            </div>
+
+
+
+            <aside class="notes">
+                <ul>
+                    <li>Arrow functions are a better way to fix the issue! ES6's purpose is to solve this problem and stop worrying about context.</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <h3>Fixing <code>this</code> scoping with arrow functions</h3>
+            <div style="min-height: 150px;">
+                <p data-height="150" data-theme-id="0" data-slug-hash="qmPzPP" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow Functions Activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/qmPzPP/">Arrow Functions Activity</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            </div>
+            <a href="https://codepen.io/anythingcodes/pen/eWGwbv?editors=0010" class="solution__lesson-1 solution" target="_blank">View Solution</a>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Array Helpers</h1>
+        </section>
+
+        <section>
+            <h2>Array Helpers</h2>
+            <p>Tons of new methods that can be applied to arrays</p>
+            <table class="data compact fragment">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.forEach((element, index, array) => { });</code></td>
+                    <td>loop through elements in an array</td>
+                    <td><code>undefined</code></td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.every((element, index, array) => { });</code></td>
+                    <td>check if <span class="blue">every</span> element passes a test</td>
+                    <td><code>true||false</code></td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.some((element, index, array) => { });</code></td>
+                    <td>check if <span class="blue">some</span> (at least 1) <code>arr</code> elements pass a test</td>
+                    <td><code>true||false</code></td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.filter((element, index, array) => { });</code></td>
+                    <td>create a new array by <span class="blue">filtering</span> the original array elements</td>
+                    <td><code>Array</code></td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.map((element, index, array) => { });</code></td>
+                    <td>create a new array by <span class="blue">modifying</span> the original array elements</td>
+                    <td><code>Array</code></td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.find((element, index, array) => { });</code></td>
+                    <td>find the <span class="blue">first element that passes a test</span></td>
+                    <td>1 element</td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.findIndex((element, index, array) => { });</code></td>
+                    <td>find the <span class="blue">index of the first element that passes a test</span></td>
+                    <td>1 element</td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></td>
+                    <td>pass in an <code>initialValue</code> and modify it according to the current <code>element</code> value</td>
+                    <td>1 reduced value</td>
+                </tr>
+            </table>
+            <aside class="notes">
+                Convenient methods applied to arrays. We'll go over each of these individually, and run through exercises. Point out that reduce() is the odd one out. It takes different parameters. Note that you don't need to use ALL the parameters, just the ones you need.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Array Helpers</h2>
+            <h3>Moving away from for loops</h3>
+            <ul>
+                <li class="fragment">Easier for other devs to immediately read and understand</li>
+                <li class="fragment">Encourage functional programming</li>
+                <li class="fragment">More compact &mdash; why write more code?</li>
+                <li class="fragment">More maintainable and scalable</li>
+            </ul>
+            <aside class="notes">Nothing wrong with for loops, but you probably don't need them anymore. Array helpers describe your intent more easily to your teammates, so it's a best practice.</aside>
+        </section>
+
+        <section>
+            <h2>forEach</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.forEach((element, index, array) => { });</code></td>
+                    <td>loop through elements in an array</td>
+                    <td><code>undefined</code></td>
+                </tr>
+            </table>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var names = ['Morgan', 'Taylor', 'Lesley'];
+
+for (var i = 0; i < names.length; i++) {
+  console.log(names[i]);
+}
+</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: forEach</h3>
+                    <pre><code contenteditable class ="javascript">const names = ['Morgan', 'Taylor', 'Lesley'];
+
+names.forEach(function(name, index, array) {
+  console.log(name);
+});</code></pre>
+                </div>
+                <p><a href="http://codepen.io/anythingcodes/pen/KagmxL?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+            </div>
+            <aside class="notes">
+                Activity on this slide: Ask class to arrow functionitize the right-hand ES6 block. Transform it in front of students!
+            </aside>
+        </section>
+
+        <section>
+            <h2>forEach</h2>
+            <code>arr.forEach(iteratorFunction)</code>
+            <pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+numbers.forEach(function(number, index, array) {
+  console.log(number > 50); // can you get this on one line?
+});</code></pre>
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>The iterator function runs once for each element in the array</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-forEach.svg" alt="forEach diagram" style="max-height: 47vh;"/></p>
+                </div>
+            </div>
+
+
+            <aside class="notes">
+                Ask students what they'd expect to see in the console. Code the arrow function version in front of students. Mention that all array helpers in the class will use arrow functions going forward. Clarify how the iterator function automatically receives the current element, in this case <code>number</code>. Point out the convention of using the plural form as the array name (numbers) and the singular form (number) in your arrow function.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Using the forEach Helper</h3>
+            <p class="small">Modify the code between <br /><code>// [START] your code here</code> and <code>// [END] your code here</code></p>
+            <div class="clear" style="min-height:300px;">
+
+                <div class="halfblock">
+                    <h6 class="light">Activity 1</h6>
+                    <p data-height="200" data-theme-id="0" data-slug-hash="rjMNEJ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: forEach #2" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/rjMNEJ/">ES6 Lesson 1: forEach #2</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/XpjJJq?editors=0010#0" target="_blank">View Solution</a>
+                    </div>
+                </div>
+                <div class="halfblock">
+                    <h6 class="light">Activity 2</h6>
+                    <p data-height="200" data-theme-id="0010" data-slug-hash="mRrdEQ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: forEach #1" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/mRrdEQ/">ES6 Lesson 1: forEach #1</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/jyMOeM?editors=0010" target="_blank">View Solution</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>every</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.every((element, index, array) => { });</code></td>
+                    <td>check if <span class="blue">every</span> element passes a test</td>
+                    <td><code>true||false</code></td>
+                </tr>
+            </table>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var students = [
+  { name: 'Morgan', present: true },
+  { name: 'Sam', present: false },
+  { name: 'Taylor', present: true }
+];
+var allPresent = true;
+for (var i = 0; i < students.length; i++) {
+  if (!students[i].present) {
+    allPresent = false;
+    break;
+  }
+}
+console.log(allPresent); // false
+</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: every</h3>
+                    <pre><code contenteditable class ="javascript">const students = [
+  { name: 'Morgan', present: true },
+  { name: 'Sam', present: false },
+  { name: 'Taylor', present: true }
+];
+const allPresent = students.every(student => student.present);
+console.log(allPresent); // false</code></pre>
+                    <p><a href="https://codepen.io/anythingcodes/pen/bWYKGW?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+                </div>
+
+            </div>
+            <aside class="notes">
+                Ask students: Which is easier to understand? Written in ES6, it’s so much cleaner! Only a few lines of code. Engineer will see ‘every’ and be able to instantaneously able to tell what the function does since they’ll recognize ‘every’ and have a reasonable idea of what it does.
+            </aside>
+        </section>
+
+        <section>
+            <h2>every</h2>
+            <code>arr.every(iteratorFunction)</code>
+            <pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+const allLargerThan50 = numbers.every(number => number > 50);
+console.log(allLargerThan50); // false</code></pre>
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:80%;float: left">
+                    <p>Runs until the iterator function returns <code>false</code>, in order to check that <span class="green">every element</span> passes a test</p>
+                </div>
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-every.svg" alt="every diagram" style="max-height: 47vh;"/></p>
+                </div>
+            </div>
+
+            <aside class="notes">Runs until iteratorFunction returns false</aside>
+        </section>
+
+        <section>
+            <h2>some</h2>
+            <table class="data compact fragment">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.some((element, index, array) => { });</code></td>
+                    <td>check if <span class="blue">some</span> (at least 1) <code>arr</code> elements pass a test</td>
+                    <td><code>true||false</code></td>
+                </tr>
+            </table>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var students = [
+  { name: 'Morgan', present: true },
+  { name: 'Sam', present: false },
+  { name: 'Taylor', present: true }
+];
+var somePresent = false;
+for (var i = 0; i < students.length; i++) {
+  if (students[i].present) {
+    somePresent = true;
+    break;
+  }
+}
+console.log(somePresent); // true
+</code></pre>
+
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: some</h3>
+                    <pre><code contenteditable class ="javascript">const students = [
+  { name: 'Morgan', present: true },
+  { name: 'Sam', present: false },
+  { name: 'Taylor', present: true }
+];
+const somePresent = students.some(student => student.present);
+console.log(somePresent); // true</code></pre>
+                    <p><a href="https://codepen.io/anythingcodes/pen/gWXKbM?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+                </div>
+
+            </div>
+            <aside class="notes">
+                <ul>
+                    <li>Before revealing slide contents, ask students: Now that we know about every(), what do you think some() would do?</li>
+                    <li>some() = <em>at least one</em></li>
+                </ul>
+
+            </aside>
+        </section>
+
+        <section>
+            <h2>some</h2>
+            <code>arr.some(iteratorFunction)</code>
+
+            <pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+const someLargerThan50 = numbers.some(number => number > 50);
+console.log(someLargerThan50); // true</code></pre>
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>Runs until the iterator function returns <code>true</code> (i.e. when <span class="green">some elements</span> pass a test)</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-some.svg" alt="some diagram" style="max-height: 47vh;"/></p>
+                </div>
+            </div>
+
+
+
+            <p>&nbsp;</p>
+            <aside class="notes">At least 1</aside>
+        </section>
+
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <h3>Using the <code>every</code> and <code>some</code> helpers</h3>
+            <div class="clear">
+                <div class="halfblock">
+                    <h3>Activity 1</h3>
+                    <div style="min-height: 260px;">
+                        <p data-height="260" data-theme-id="0" data-slug-hash="mmqKEE" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="every() and some() activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/mmqKEE/">every() and some() activity</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    </div>
+                    <a href="https://codepen.io/anythingcodes/pen/BZBgdE?editors=0010" target="_blank" class="solution solution__lesson-2">View Solution</a>
+                </div>
+                <div class="halfblock">
+                    <h3>Activity 2</h3>
+                    <div style="min-height: 260px;">
+                        <p data-height="260" data-theme-id="0" data-slug-hash="WjXyXz" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="every() and some() activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/WjXyXz/">every() and some() activity #2</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    </div>
+                    <a href="https://codepen.io/anythingcodes/pen/xrKoPL?editors=0010" target="_blank" class="solution solution__lesson-2">View Solution</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>filter</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.filter((element, index, array) => { });</code></td>
+                    <td>create a new array by <span class="blue">filtering</span> the original array elements</td>
+                    <td><code>Array</code></td>
+                </tr>
+            </table>
+            <p class="fragment"><code>const filteredArr = arr.filter(iteratorFunction);</code></p>
+            <div class="clear fragment small">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var users = [
+  { username: 'ryan10', active: true },
+  { username: 'morgan', active: false }
+];
+var activeUsers = [];
+for (var i = 0; i < users.length; i++) {
+  if (users[i].active) {
+    activeUsers.push(users[i]);
+  }
+}
+console.log(activeUsers);</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6</h3>
+                    <pre><code contenteditable class ="javascript">const users = [
+  { username: 'ryan10', active: true },
+  { username: 'morgan', active: false }
+];
+const activeUsers = users.filter(user => user.active);
+console.log(activeUsers);</code></pre>
+                    <p class="small"><a href="http://codepen.io/anythingcodes/pen/LxRqOZ?editors=0012" target="_blank">CodePen example with non-boolean &raquo;</a></p>
+                </div>
+
+            </div>
+            <aside class="notes">
+                Don't need to use an if statement, since <code>user.active</code> returns a boolean. Also <code>home.price < 600000</code> returns a boolean. With <code>filter()</code>, you are not modifying the array; you're just returning an array of items that match a certain test.
+            </aside>
+        </section>
+
+        <section>
+            <h2>filter</h2>
+            <code>arr.filter(iteratorFunction)</code>
+            <pre class="small javascript fragment"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+const numbersLargerThan50 = numbers.filter(number => number > 50);
+console.log(numbersLargerThan50); // [ 123, 500, 82 ]</code></pre>
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>Only the <span class="green">elements that return true</span> are included in the resulting array</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-filter.svg" alt="filter diagram" style="max-height: 47vh;"/></p>
+                </div>
+            </div>
+
+
+            <p>&nbsp;</p>
+            <aside class="notes">With filter(), the resulting array is always less than or equal to the size of the original array</aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Using the filter helper</h3>
+            <div class="clear">
+                <div class="halfblock">
+                    <h6 class="light">Activity 1</h6>
+                    <p data-height="250" data-theme-id="0" data-slug-hash="GrNKXy" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: filter #2" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/GrNKXy/">ES6 Lesson 1: filter #2</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <p class="clear blue small" style="background-color: #fff;border: 1px solid black;padding: 5px 0;margin:15px 0"><strong>Activity 1 Tip:</strong> A number is even if<br /><code style="background-color:white;color:black;">number % 2 === 0</code></p>
+                    <p>
+                        <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/eWwaWN?editors=0010" target="_blank">View Solution</a>
+                    </p>
+                </div>
+                <div class="halfblock">
+                    <h6 class="light">Activity 2</h6>
+                    <p data-height="250" data-theme-id="0" data-slug-hash="NdRoML" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: filter #1" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/NdRoML/">ES6 Lesson 1: filter #1</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <p>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/ggwERZ?editors=0012" target="_blank">View Solution</a>
+                    </p>
+
+                </div>
+            </div>
+
+            <p>&nbsp;</p>
+        </section>
+
+        <section>
+            <h2><code>filter()</code> Practical Example</h2>
+            <h3>Filtering API Responses</h3>
+            <div class="fragment-progression">
+
+                <div class="fragment"><img src="dist/img/comments-post-data__1.svg" alt="The data relationship between comments and posts - step 1" /></div>
+
+                <div class="fragment"><img src="dist/img/comments-post-data__2.svg" alt="The data relationship between comments and posts - step 2" /></div>
+
+                <div class="fragment"><img src="dist/img/comments-post-data__3.svg" alt="The data relationship between comments and posts - step 3" /></div>
+
+                <div class="fragment"><img src="dist/img/comments-post-data__4.svg" alt="The data relationship between comments and posts - step 4" /></div>
+
+                <div class="fragment"><img src="dist/img/comments-post-data__5.svg" alt="The data relationship between comments and posts - step 5" /></div>
+
+                <div class="fragment"><img src="dist/img/comments-post-data.svg" alt="The data relationship between comments and posts" /></div>
+
+
+            </div>
+
+            <p class="small">
+                <a href="https://jsonplaceholder.typicode.com/comments" target="_blank">API Response Example &raquo;</a><br /><a href="http://codepen.io/anythingcodes/pen/ggLYoX?editors=0012" target="_blank">CodePen Example &raquo;</a>
+            </p>
+
+            <aside class="notes">
+                Describe one common use case for the filter helper, including filtering JSON to only reveal the comments associated with a specific post (e.g. postId 23 for post with ID for 23). Mention that we'll code an example of this on the next slide. Mention students should focus on refactoring lines 21 through 28.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Filtering API responses</h3>
+            <h6 class="light">Activity 3</h6>
+            <p data-height="250" data-theme-id="0" data-slug-hash="PWGLeg" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: filter #2" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/PWGLeg/">ES6 Lesson 1: filter #3</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            <p>
+                <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/LxRqaW?editors=1010" target="_blank">View Solution</a>
+            </p>
+            <p class="clear blue small" style="background-color: #fff;border: 1px solid black;padding: 5px 0;margin:15px 0"><strong>Tip:</strong> Try to use more than one array helper. Are there any other ES6 tricks you could use to clean up this code?</p>
+            <p>&nbsp;</p>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>At-Home Challenge: Implement a <code>reject</code> function</h2>
+            <div class="small clear">
+                <div class="halfblock">
+							<pre><code contenteditable class ="javascript" >function reject(array, iteratorFunction) {
+  // your code here
+}</code></pre>
+                    <div class="fragment small" style="background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> You may use <em>filter</em>.
+                    </div>
+                    <p>Fork <a href="https://codepen.io/anon/pen/dRbWJv?editors=0010" target="_blank">this CodePen</a> for some starter code.</p>
+
+                </div>
+                <div class="halfblock">
+                    <p class="small">Reject should work opposite to filter; if a function returns <code>true</code>, the item should <em>not</em> be included in the new array, for example:<br />&nbsp;</p>
+                    <pre><code contenteditable class ="javascript" >const numbers = [ 5, 10, 15, 17, 18, 20 ];
+const lessThanEighteen = reject(numbers, number => number >= 18);
+console.log(lessThanEighteen);
+// returns [ 5, 10, 15, 17 ];</code></pre>
+
+                </div>
+            </div>
+
+            <!--<div>
+                <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/VPmZNz?editors=0012" target="_blank">View Solution</a>
+            </div>-->
+        </section>
+
+        <section>
+            <h2>map</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.map((element, index, array) => { });</code></td>
+                    <td>create a new array by <span class="blue">modifying</span> the original array elements</td>
+                    <td><code>Array</code></td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p class="fragment">You can <span class="blue">assign the resulting array</span> to a variable:<br /><code>const modifiedArr = arr.map(iteratorFunction);</code></p>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var numbers = [2, 6, 10];
+var halvedNumbers = [];
+
+for (var i = 0; i < numbers.length; i++) {
+  halvedNumbers.push(numbers[i] / 2);
+}
+
+console.log(halvedNumbers); // 1, 3, 5
+</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: map</h3>
+                    <pre><code contenteditable class ="javascript" >const numbers = [2, 6, 10];
+
+const halvedNumbers = numbers.map(number => number / 2);
+
+console.log(halvedNumbers); // 1, 3, 5
+</code></pre>
+                </div>
+                <p><a href="http://codepen.io/anythingcodes/pen/MJjoxm?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+            </div>
+            <p class="small orange fragment">No need to create an empty array first! 🎉</p>
+            <aside class="notes">
+                Primary difference between forEach and map: <em>forEach</em> iterates through an array but <span class="orange">doesn't return anything</span>
+            </aside>
+        </section>
+
+        <section>
+            <h2>map</h2>
+            <code>arr.map(iteratorFunction)</code>
+
+            <pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+const decrementedNumbers = numbers.map(number => number - 1);
+console.log(decrementedNumbers); // [ 122, 499, -51, 81, 7 ]</code></pre>
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>The iterator function runs once for each element in the array</p>
+                    <p class="fragment info blue">Be sure to return a value each iteration!</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-map.svg" alt="map diagram" style="max-height: 47vh;"/></p>
+                </div>
+            </div>
+            <aside class="notes">
+                Difference between forEach() and map(): map() returns an array at the end. Don't use map if you just need to loop through an array. forEach doesn't return anything, but map <em>modifies</em> the previous array values ti create a new array.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Using the map Helper</h3>
+            <div class="clear" style="min-height:350px;">
+                <div class="halfblock">
+                    <h6 class="light">Activity 1</h6>
+                    <p data-height="350" data-theme-id="0" data-slug-hash="JERyKw" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: map #2" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/JERyKw/">ES6 Lesson 1: map #2</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/QdKMaq?editors=0012" target="_blank">View Solution</a>
+                    </div>
+                </div>
+                <div class="halfblock">
+                    <h6 class="light">Activity 2</h6>
+                    <p data-height="350" data-theme-id="0" data-slug-hash="RKGZQW" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="ES6 Lesson 1: map #1" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/JERyKw/">ES6 Lesson 1: map #1</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                    <div>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/xgELgm?editors=0012" target="_blank">View Solution</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>At-Home Challenge: Implement a <code>pluck</code> function</h2>
+            <div class="small clear">
+                <div class="halfblock">
+							<pre><code contenteditable class ="javascript" >function pluck(array, property) {
+  // your code here
+}</code></pre>
+                    <div class="fragment small" style="background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> Access a property on an object by using square bracket notation. For example:<br />&nbsp;</p>
+                        <pre><code contenteditable class ="javascript" >const animal = { type: 'Dinosaur', status: 'Extinct' };
+animal['type']; // returns 'Dinosaur'</code></pre>
+                    </div>
+
+                </div>
+                <div class="halfblock">
+                    <p class="small">Pluck should accept an array and a string representing a property name and return an array containing that property from each object, for example:<br />&nbsp;</p>
+                    <pre><code contenteditable class ="javascript" >const cats = [ { name: 'Colonel Meow' }, { name: 'Lil Bub' }, { name: 'Grumpy Cat' }];
+
+pluck(cats, 'name');
+// returns ['Colonel Meow', 'Lil Bub', 'Grumpy Cat'];
+</code></pre>
+
+                </div>
+            </div>
+
+            <!--<div>
+                <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/pRErMO?editors=0012" target="_blank">View Solution</a>
+            </div>-->
+        </section>
+
+        <section>
+            <h2>find</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.find((element, index, array) => { });</code></td>
+                    <td>find the <span class="blue">first element that passes a test</span></td>
+                    <td>1 element</td>
+                </tr>
+            </table>
+            <p class="fragment"><code>const matchingObject = arr.find(iteratorFunction);</code></p>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var jobs = [
+  { title: 'Electrician' },
+  { title: 'Developer' },
+  { title: 'Barista' }
+];
+var devJob;
+for (var i = 0; i < jobs.length; i++) {
+  if (jobs[i].title === 'Developer') {
+    devJob = jobs[i];
+    break;
+  }
+}
+console.log(devJob); // { title: 'Developer' }</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: find</h3>
+                    <pre><code contenteditable class ="javascript">const jobs = [
+  { title: 'Electrician' },
+  { title: 'Developer' },
+  { title: 'Barista' }
+];
+const devJob = jobs.find(job => job.title === 'Developer');
+console.log(devJob); // { title: 'Developer' }</code></pre>
+                    <p class="small"><a href="http://codepen.io/anythingcodes/pen/ggLbMO?editors=0012" target="_blank">CodePen Example &raquo;</a></p>
+                </div>
+
+            </div>
+            <aside class="notes">
+                Don't need to use an if statement, since <code>user.active</code> returns a boolean. Also <code>home.price < 600000</code> returns a boolean.
+            </aside>
+        </section>
+
+        <section>
+            <h2>find</h2>
+            <p><code>arr.find(iteratorFunction)</code></p>
+            <div class="small"><pre class="small"><code contenteditable class ="javascript">const jobs = [
+{ title: 'Electrician' },
+{ title: 'Developer' },
+{ title: 'Barista' }
+];
+const devJob = jobs.find(job => job.title === 'Developer');
+console.log(devJob); // { title: 'Developer' }</code></pre></div>
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>Runs until the iterator function returns <code>true</code>. When it does, the element at that index is returned.</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p><img src="dist/img/diagram-find.svg" alt="find diagram" style="max-height: 40vh;"/></p>
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <h2><code>find()</code> Practical Example</h2>
+            <h3>Single-page web apps</h3>
+            <p><img src="dist/img/single-page-app__find.png" alt="The find helper in a single-page web app" /></p>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Using the find helper</h3>
+
+
+                <div style="min-height:250px;">
+                    <p data-height="250" data-theme-id="0" data-slug-hash="aWrgYQ" data-default-tab="js,result" data-user="anythingcodes" data-embed-version="2" data-pen-title="the find() array helper" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/aWrgYQ/">the find() array helper</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <p>
+                        <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/ZKNdMR?editors=0012" target="_blank">View Solution</a>
+                    </p>
+                </div>
+
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+           <h2>At-Home Challenge: Write a <code>findWhere</code> function</h2>
+
+            <div class="clear small" style="margin-top:0">
+                <div class="halfblock">
+                    <p>Often we need to find an object with a given property and value. Write a <code>findWhere</code> function that accepts two parameters, the array and the criteria as an object, and returns the matching object. You may assume that the criteria is one key-value pair. Fork <a href="https://codepen.io/anythingcodes/pen/VbOoOz?editors=0012" style="font-weight: bold;" target="_blank">this CodePen</a> for some starter code.</p>
+
+                    <div class="fragment" style="font-size:70%;background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> Use <code style="background-color:white;color:black;">Object.keys(criteria)[0]</code> to figure out the name of the property on the object. For example, <code style="background-color:white;color:black;">Object.keys({ type: 'marsupial' })</code> would return <code style="background-color:white;color:black;">'type'</code>. You could then check to see if a given element in the array had a property equal to the criteria's value with something like <code style="background-color:white;color:black;">element[property] === criteria[property]</code>.</p>
+                    </div>
+                </div>
+                <div class="halfblock">
+                    <p>The following code ...</p>
+                    <pre><code contenteditable class="javascript">const animals = [
+  { id: 0, name: 'iguana', type: 'reptile' },
+  { id: 1, name: 'cardinal', type: 'bird' },
+  { id: 2, name: 'platypus', type: 'marsupial' },
+  { id: 3, name: 'frog', type: 'amphibian' }
+];
+
+findWhere(animals, { type: 'marsupial' });</code></pre>
+                    <p>would return one object ...</p>
+                    <pre><code class="javascript">{ id: 2, name: 'platypus', type: 'marsupial' }</code></pre>
+                </div>
+            </div>
+            <!--<div>
+                <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/pPXzRv?editors=0012" target="_blank">View Solution</a>
+            </div>-->
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>At-Home Challenge: Write a <code>filterWhere</code> function</h2>
+            <div class="clear small" style="margin-top:0">
+                <div class="halfblock">
+                    <p style="font-size:85%;">Write a <code>filterWhere</code> function that accepts two parameters, the array and the criteria as an object, and returns an array of matching objects. All of the criteria must match for an object to be included in the resulting array. Assume that multiple criteria can be included, for example:</p>
+                    <pre><code class="javascript">filterWhere(animals, { name: 'kangaroo', type: 'marsupial' })</code></pre>
+                    <p style="font-size:85%;">Fork <a href="https://codepen.io/anythingcodes/pen/NjZKjZ?editors=0012" style="font-weight: bold;" target="_blank">this CodePen</a> for some starter code.</p>
+                    <div class="fragment" style="font-size:70%;background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> Although you may need different array helpers for this challenge, we recommend warming up with the previous slide's <code>findWhere</code> challenge first.</p>
+                    </div>
+
+                </div>
+                <div class="halfblock">
+                    <p>The following code ...</p>
+                    <pre><code contenteditable class="javascript">const animals = [
+  { id: 0, name: 'iguana', type: 'reptile' },
+  { id: 1, name: 'cardinal', type: 'bird' },
+  { id: 2, name: 'platypus', type: 'marsupial' },
+  { id: 3, name: 'kangaroo', type: 'marsupial' },
+  { id: 4, name: 'frog', type: 'amphibian' }
+];
+
+filterWhere(animals, { type: 'marsupial' });</code></pre>
+                    <p>would return an array of ...</p>
+                    <pre><code class="javascript">[
+  { id: 2, name: 'platypus', type: 'marsupial' },
+  { id: 3, name: 'kangaroo', type: 'marsupial' }
+]</code></pre>
+
+                </div>
+            </div>
+
+            <!--<div>
+                <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/BReXEP?editors=0012" target="_blank">View Solution</a>
+            </div>-->
+
+            <aside class="notes">Much more difficult! Say it's optional and there are multiple ways you could solve this or the other challenge.</aside>
+        </section>
+
+        <section>
+            <h2>findIndex</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.findIndex((element, index, array) => { });</code></td>
+                    <td>find the <span class="blue">index of the first element that passes a test</span></td>
+                    <td>1 element</td>
+                </tr>
+            </table>
+            <p class="fragment"><code>const matchingIndex = arr.findIndex(iteratorFunction);</code></p>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre><code contenteditable class ="javascript">var numbers = [ 25, 30, 35, 40, 45 ];
+var firstIndex;
+for (var i = 0; i < numbers.length; i++) {
+  if (numbers[i] > 33) {
+    firstIndex = i;
+    break;
+  }
+}
+console.log(firstIndex); // 2</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: findIndex</h3>
+                    <pre><code contenteditable class ="javascript">const numbers = [ 25, 30, 35, 40, 45 ];
+const firstIndex = numbers.findIndex(number => number > 33);
+console.log(firstIndex); // 2 (the location of 35)</code></pre>
+                    <p class="small"><a href="http://codepen.io/anythingcodes/pen/ggLbMO?editors=0012" target="_blank">CodePen Example &raquo;</a></p>
+                </div>
+
+            </div>
+            <aside class="notes">No activity for this, but good to know about</aside>
+        </section>
+
+        <section>
+            <h2>findIndex</h2>
+            <p><code>arr.findIndex(iteratorFunction)</code></p>
+            <pre class="small"><code contenteditable class ="javascript">const numbers = [ 25, 30, 35, 40, 45 ];
+const firstIndex = numbers.findIndex(number => number > 33);
+console.log(firstIndex); // 2 (the location of 35)</code></pre>
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:25%; font-size:75%;float: left">
+                    <p>Just like <code>find()</code>, runs until the iterator function returns <code>true</code>. When it does, that index is returned.</p>
+                </div>
+
+                <div style="width:75%; float: left">
+                    <p>
+                        <img src="dist/img/diagram-findIndex.svg" alt="The findIndex array helper" />
+                    </p>
+                </div>
+            </div>
+
+            <aside class="notes">
+                Explain how, once true returns, the iteration stops and the matching index (2) returns to the overall findIndex function. Not going to do an activity for this one, but it's good to know about.
+            </aside>
+        </section>
+
+        <section>
+            <h2>reduce</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Helper</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></td>
+                    <td>pass in an <code>initialValue</code> and modify it according to the current <code>element</code> value</td>
+                    <td>1 reduced value</td>
+                </tr>
+            </table>
+            <p class="fragment"><code>const reducedValue = arr.reduce(iteratorFunction, initialValue);</code></p>
+            <div class="clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loop</h3>
+                    <pre class="small"><code contenteditable class ="javascript">var numbers = [2, 6, 10];
+
+var sum = 0;
+for (var i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+}
+
+console.log(sum); // 18
+</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: reduce</h3>
+                    <pre class="small"><code contenteditable class="javascript" >const numbers = [2, 6, 10];
+
+const sum = numbers.reduce(function(currentSum, number) {
+  return currentSum + number;
+}, 0);
+
+console.log(sum); // 18
+</code></pre>
+                </div>
+                <p><a href="http://codepen.io/anythingcodes/pen/qmVrdK?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+            </div>
+            <aside class="notes">
+                Activity on this slide: Ask class to arrow functionitize the right-hand ES6 block. We saved the weirdest and hardest one for last. But it's the most flexible since you can return any type of object you want &mdash; integer, object with keys, array, anything. One crucial difference is you MUST pass an initial value to reduce.
+            </aside>
+        </section>
+
+
+        <section>
+            <h2>reduce</h2>
+            <pre class="small"><code class="javascript">// when iteratorFunction is a reference:
+arr.reduce(iteratorFunction, initialValue);
+
+// or when iteratorFunction isn't a reference:
+arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></pre>
+            <p>&nbsp;</p>
+            <p class="fragment">reduce is <span class="orange">slightly different</span> from the other array helpers because it takes <span class="green">two parameters</span>:</p>
+            <ol>
+                <li class="fragment"><code>iteratorFunction</code>
+                    <ul>
+                        <li class="fragment">The iterator function requires a <code>calculatedValue</code> parameter, which is modified each time and <span class="green">returned each iteration</span></li>
+                    </ul>
+                </li>
+                <li class="fragment"><code>initialValue</code> &mdash; used during the first iteration to calculate the next iteration's <code>calculatedValue</code></li>
+            </ol>
+
+            <aside class="notes">Ask students what parts of the call are similar to other array helpers and what are different.</aside>
+
+        </section>
+
+        <section>
+            <h2>reduce in action</h2>
+
+            <p><code class="javascript">arr.reduce(iteratorFunction, initialValue);</code></p>
+            <pre class="small"><code class="javascript" contenteditable>const numbers = [1, 5, 10];
+
+const sum = numbers.reduce(function(calculatedValue, number) {
+    return calculatedValue + number;
+}, 0); // 0 is the initialValue
+
+console.log(sum); // 16</code></pre>
+
+
+            <div class="clear fragment" style="margin-top:.5em;">
+                <div style="width:75%; float: left">
+                    <img src="dist/img/diagram-reduce.svg" alt="reduce array helper ES6" />
+                </div>
+                <div style="width:25%;float: left">
+                    <p class="small fragment"><a href="https://codepen.io/anythingcodes/pen/rmgJNe?editors=0012" target="_blank">Let's take a look &raquo;</a></p>
+                </div>
+            </div>
+            <aside class="notes">Transform it into an arrow function in front of students. Remove unneeded 'index' and 'array' params. Show how, each iteration, the 'calculatedValue' changes -- it's passed into the function each iteration.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activities</h2>
+            <h3>Using the reduce helper</h3>
+            <div class="clear">
+                <div class="halfblock">
+                    <h6 class="light">Activity 1</h6>
+
+                    <div style="min-height:250px;">
+                        <p data-height="265" data-theme-id="0" data-slug-hash="OmOwgB" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="reduce activity #2 " class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/OmOwgB/">reduce activity #2 </a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                        <p>
+                            <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/jmapwj?editors=0012" target="_blank">View Solution</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="halfblock">
+                    <h6 class="light">Activity 2</h6>
+                    <div style="min-height:250px;">
+                        <p data-height="265" data-theme-id="0" data-slug-hash="wdPxaE" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="reduce activity #2 " class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/wdPxaE/">reduce activity #2 </a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                        <p>
+                            <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/XRzYqL?editors=0012" target="_blank">View Solution</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Map and Reduce</h2>
+            <h3>A Sandwich Metaphor</h3>
+            <p><img src="dist/img/sandwiches__map-reduce.jpg" alt="Map and Reduce with sandwiches" /></p>
+        </section>
+
+        <section>
+            <h2>reduce</h2>
+            <h3 class="green">Use it creatively and ace your next interview</h3>
+            <ul style="list-style:none;">
+                <li class="small"><em>Write a function, <code>isBalanced</code>, to determine if an expression's parentheses are balanced. For example, <code>(())()()</code> would be balanced, while <code>()(()</code> and <code>)(</code> would not.</em></li>
+            </ul>
+            <div class="clear fragment small" style="margin-top:.5em;">
+                <div class="halfblock">
+                    <h3 class="green">ES5 🤔❓</h3>
+                    <pre style="font-size:80%"><code class="javascript" contenteditable>var parens = '(())()()';
+var parensFalse = '()(()';
+var parensFalse2 = ')(';
+
+console.log(isBalanced(parens)); // true
+console.log(isBalanced(parensFalse)); // false
+console.log(isBalanced(parensFalse2)); //false
+
+function isBalanced(expression) {
+  var retVal = 0;
+  var chars = expression.split('');
+  for (var i = 0; i < chars.length; i++) {
+    var char = chars[i];
+    if (retVal >= 0) {
+      if (char === '(') {
+        retVal++;
+      } else if (char === ')') {
+        retVal--;
+      }
+    }
+  }
+  return retVal === 0;
+}</code></pre>
+                    <a href="https://codepen.io/anythingcodes/pen/zwQRpz?editors=0012" target="_blank" class="small">View on CodePen &raquo;</a>
+                    <!--<p data-height="350" data-theme-id="0" data-slug-hash="NjwBeQ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="reduce() for balancing parentheses" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/RVjBQJ/">reduce() for balancing parentheses</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>-->
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6 💪</h3>
+                    <p>We can do better!</p>
+                    <p>Let's <a href="https://codepen.io/anythingcodes/pen/OmYQZe?editors=0012" target="_blank">head to CodePen &raquo;</a></p>
+                    <p>&nbsp;</p>
+                    <p><a href="https://codepen.io/anythingcodes/pen/RVjBQJ?editors=0012" class="solution solution__lesson-2" target="_blank">View Solution &raquo;</a></p>
+                </div>
+            </div>
+
+            <aside class="notes">
+                Fairly common interview question. Draw out the table for each example to show what's happening, and why we're incrementing/decrementing:
+                <p><img src="../../dist/img/reduce-balancing-parens.png" alt="Balancing parentheses with ES6 reduce()" /></p>
+            </aside>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>At-Home Challenge: Implement a <code>unique</code> function</h2>
+            <div class="clear">
+                <div class="halfblock">
+							<pre><code contenteditable class ="javascript" >function unique(array) {
+  // your code here
+}</code></pre>
+                    <div class="fragment small" style="background-color:rgba(255,255,255,0.6);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> Use <em>reduce</em> and <em>find</em>.
+                    </div>
+
+                </div>
+                <div class="halfblock">
+                    <p class="small">Write a function that will remove duplicate values from an array. For example:<br />&nbsp;</p>
+                    <pre class="small"><code class ="javascript" >const arr = [ 5, 5, 10, 10, 15, 20, 20 ];
+const uniqueArr = unique(arr);
+console.log(uniqueArr);
+// returns [ 5, 10, 15, 20 ];</code></pre>
+
+                </div>
+            </div>
+
+            <!--<div>
+                <a class="solution solution__lesson-2" href="http://codepen.io/anythingcodes/pen/QvOpKE?editors=0012" target="_blank">View Solution</a>
+            </div>-->
+        </section>
+
+        <section class="quiz" data-background="rgb(6, 116, 123)">
+            <h2>Quiz</h2>
+            <h3>Which array helper would be most suitable for each situation? <span class="small">(<code>forEach</code>, <code>every</code>, <code>some</code>, <code>filter</code>, <code>map</code>, <code>find</code>, or <code>reduce</code>)</span></h3>
+            <ol class="small">
+                <li class="fragment">You need to check if all elements in an array are integers.</li>
+                <li class="fragment">You have an array of blog posts and need to output each post on the page.</li>
+                <li class="fragment">You need to check if an array has at least one element that isn't null.</li>
+                <li class="fragment">You have an array of expenses and need to calculate your total expenses last month.</li>
+                <li class="fragment">You need a new array to store the square root of each item in an existing array.</li>
+                <li class="fragment">You have an array of computers, but only need computers with more than 16 GB of RAM.</li>
+                <li class="fragment">You have an array of blog posts, and need to retrieve one post by its ID.</li>
+            </ol>
+
+            <aside class="notes">
+                Answers:
+                <ol>
+                    <li>every()</li>
+                    <li>forEach()</li>
+                    <li>some()</li>
+                    <li>reduce()</li>
+                    <li>map()</li>
+                    <li>filter()</li>
+                    <li>find()</li>
+                </ol>
+            </aside>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>Food for Thought 🤔</h2>
+            <h3>Array helpers are often used in single-page web apps, like Gmail. Which array helper would be most suitable for each situation? <span class="small">(<code>forEach</code>, <code>every</code>, <code>some</code>, <code>filter</code>, <code>map</code>, <code>find</code>, or <code>reduce</code>)</span></h3>
+            <div class="fragment-progression">
+                <p><img src="dist/img/array-helper-quiz.jpg" alt="const bindings and reassignments" /></p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__filter.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__find.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__forEach.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__map.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__some.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__reduce.jpg" />
+                </p>
+                <p class="fragment">
+                    <img src="dist/img/array-helper-quiz__every.jpg" />
+                </p>
+            </div>
+            <aside class="notes">More something to think about; we won't be doing this in class, but it's good to see real-world examples and think about how you might solve them. Gmail is a single-page web app &mdash; that's why before loading Gmail you see a progress bar, as it fetches everything from server once and then all the rendering is done on the client side with calls to server only for fetching data and not the DOM.</aside>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Altering Arrays</h1>
+        </section>
+
+        <section>
+            <h2>Altering Arrays</h2>
+            <p>New methods that alter existing arrays</p>
+            <p>&nbsp;</p>
+            <table class="data compact fragment">
+                <tr>
+                    <th>Array Method</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.fill((value, startIndex, endIndex) => { });</code></td>
+                    <td>fill all the elements of an array from start index to end index with <code>value</code></td>
+                    <td>the modified array</td>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.copyWithin((targetIndex, startIndex, endIndex) => { });</code></td>
+                    <td>copy part of an array to another location in the same array</td>
+                    <td>the modified array</td>
+                </tr>
+            </table>
+            <aside class="notes">No activities, but good to know</aside>
+        </section>
+
+        <section>
+            <h2>fill</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Method</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.fill((value, startIndex, endIndex) => { });</code></td>
+                    <td>fill all the elements of an array from start index to end index with <code>value</code></td>
+                    <td>the modified array</td>
+                </tr>
+            </table>
+            <ul>
+                <li class="small fragment">If no <code>startIndex</code> or <code>endIndex</code> is given, the whole array is filled with the same value</li>
+            </ul>
+            <div class="small clear fragment">
+                <div class="halfblock">
+                    <h3 class="green">ES5: for loops</h3>
+                    <pre><code contenteditable class ="javascript">var numbers = [1, 2, 3];
+
+for (var i = 0; i < numbers.length; i++) {
+  numbers[i] = 4;
+}
+
+console.log(numbers); // [4, 4, 4]
+
+
+var numbers2 = [1, 2, 3];
+var startIndex = 1;
+var endIndex = 2;
+for (var j = 0; j < numbers2.length; j++) {
+  if (j >= startIndex && j < endIndex) {
+    numbers2[j] = 4;
+  }
+}
+
+console.log(numbers2); // [1, 4, 3]</code></pre>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green">ES6: fill</h3>
+                    <pre><code contenteditable class ="javascript">const numbers = [1, 2, 3];
+const numbers2 = [1, 2, 3];
+
+numbers.fill(4);
+console.log(numbers); // [4, 4, 4]
+
+numbers2.fill(4, 1, 2);
+console.log(numbers2); // [1, 4, 3]</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>copyWithin</h2>
+            <table class="data compact">
+                <tr>
+                    <th>Array Method</th>
+                    <th>Use it to...</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code class="javascript">arr.copyWithin((targetIndex, startIndex, endIndex) => { });</code></td>
+                    <td>copy part of an array to another location in the same array</td>
+                    <td>the modified array</td>
+                </tr>
+            </table>
+            <ul>
+                <li class="small fragment">If no <code>startIndex</code> or <code>endIndex</code> is given, the whole array is filled with the same value</li>
+            </ul>
+            <p>&nbsp;</p>
+            <div class="fragment">
+                <pre><code contenteditable class ="javascript">const spells = ['hocus', 'pocus', 'wingardium', 'leviosa'];
+
+spells.copyWithin(2, 0);
+console.log(spells);
+// ['hocus', 'pocus', 'hocus', 'pocus']</code></pre>
+            </div>
+            <aside class="notes">Default value for endIndex is the array length</aside>
+        </section>
+
+        <!--<section class="hide-pdf">-->
+            <!--<h2>Next Week</h2>-->
+            <!--<ol>-->
+                <!--<li>Function Parameters</li>-->
+                <!--<li>Expanded Object Functionality</li>-->
+                <!--<li>Destructuring</li>-->
+                <!--<li>Classes and subclasses</li>-->
+                <!--<li>Iterators and Generators</li>-->
+            <!--</ol>-->
+        <!--</section>-->
+        <section class="hide-pdf">
+            <h2>Questions</h2>
+            <div style="font-size:1200%; height:100%;" class="blue">?
+                <div class="clear"></div>
+            </div>
+            <aside class="notes">Can always email me!</aside>
+        </section>
+
+    </div>
+    <footer>
+        <div class="copyright">
+            View Slides at <a href="http://tiny.cc/gdies6">tiny.cc/gdies6</a> &nbsp; - &nbsp;
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+        </div>
+    </footer>
+</div>
+
+
+<script src="dist/js/head.min.js"></script>
+<script src="dist/js/babel.min.js"></script>
+<script src="dist/js/reveal.min.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+    // Optional reveal.js plugins
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true }
+    ]
+  });
+
+</script>
+<script async src="//production-assets.codepen.io/assets/embed/ei.js"></script>
+</body>
+</html>

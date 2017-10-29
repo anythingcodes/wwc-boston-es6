@@ -1,0 +1,44 @@
+// Base settings for all themes that can optionally be
+// overridden by the super-theme
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+// Background of the presentation
+$backgroundColor: #2b2b2b;
+
+// WWC brand colors
+$primary: #007a7c;
+$primaryLight:#029393;
+$primaryDark: #024f4f;
+
+// Primary/body text
+$mainFont: 'Source Sans Pro', sans-serif;
+$mainFontSize: 36px;
+$mainColor: #19191A;
+
+// Headings
+$headingMargin: 0 0 20px 0;
+$headingFont: $mainFont;
+$headingColor: #eee;
+$headingLineHeight: 0.9em;
+$headingLetterSpacing: 0.02em;
+$headingTextTransform: uppercase;
+$headingTextShadow: 0px 0px 6px rgba(0,0,0,0.2);
+$heading1TextShadow: $headingTextShadow;
+
+// Links and actions
+$linkColor: #13DAEC;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #FF5E99;
+$selectionColor: #fff;
+
+// Progress Bar
+$lightBlue: #01a9b4;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+	background: $backgroundColor;
+}

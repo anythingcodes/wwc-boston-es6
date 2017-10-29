@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Getting Started with ES6 and ES7 JavaScript</title>
+
+    <meta name="description" content="Materials and slides for a Girl Develop It ES6 JavaScript course. Includes ES7's minor additions.">
+    <meta name="author" content="Girl Develop It">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="dist/css/reveal.css">
+    <link rel="stylesheet" href="dist/css/gdidarkblue.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- light editor --><link rel="stylesheet" href="dist/css/light.css">
+    <!-- dark editor <link rel="stylesheet" href="dist/css/dark.css">-->
+    <!-- <link rel="stylesheet" href="dist/css/zenburn.css"> -->
+
+    <link rel="stylesheet" href="plugin/accessibility-helper/css/accessibility-helper.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'dist/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!-- If use the PDF print sheet so students can print slides-->
+
+    <link rel="stylesheet" href="dist/css/print/pdf.css" type="text/css" media="print">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script src="dist/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body spellcheck="false">
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <!-- Opening -->
+        <section class="small">
+            <h1>Getting Started with ES6 and ES7 JavaScript</h1>
+            <img src="dist/img/es6-gdi.jpg" alt="ES6 and ES7 Intro Image" class="noborder"/>
+            <h2 class="green">Class 4</h2>
+        </section>
+
+        <section>
+            <h2>Today's Topics</h2>
+            <ol style="width:85%">
+                <li>Review at-home challenges from previous class</li>
+                <li>Promises</li>
+                <li>Fetch</li>
+                <li>The Fetch Helper</li>
+                <li>Generator Functions</li>
+                <li>Iterables</li>
+                <li>Sets and Maps</li>
+                <li>Classes</li>
+                <li>Encapsulating Code with Modules</li>
+                <li>Transpiling Setup</li>
+                <li>Additional Resources</li>
+            </ol>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h3>Review: Refactor a <code>detectCollision</code> function</h3>
+            <div class="clear">
+                <div class="halfblock">
+                    <p data-height="300" data-theme-id="0" data-slug-hash="gROvJv" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Class 3 Challenge - detectCollision()" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/gROvJv/">Class 3 Challenge - detectCollision()</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+
+                </div>
+                <div class="halfblock small">
+                    Although <code>detectCollision</code> works as intended, we can refactor it to improve its performance and readability. Reformat <code>detectCollision</code> to use destructuring and an array helper.
+                    <div style="background-color:rgba(255,255,255,0.3);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Hint:</strong> We'll return a single matched object. Which array helper would be best in this case?
+                    </div>
+                </div>
+            </div>
+            <a href="https://codepen.io/anythingcodes/pen/PjoQvR?editors=0010" class="solution solution__lesson-3" target="_blank">View Solution &raquo;</a>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h3>Review: Mixed Destructuring</h3>
+            <div class="clear">
+                <div class="halfblock small">
+							<pre><code contenteditable class ="javascript" >const node = {
+  location: {
+    start: {
+      line: 1, // first
+      column: 1 // second
+    },
+    end: {
+      line: 1,
+      column: 4
+    }
+  },
+  range: [0, 3] // third: outputs first array element
+};
+
+const {
+  location: { start },
+  range: [ index ]
+} = node;
+
+console.log(start.line); // 1
+console.log(start.column); // 1
+console.log(index); // 0</code></pre>
+
+                </div>
+                <div class="halfblock small">
+                    <p>What would the following output to the console and why?</p>
+                    <div style="background-color:rgba(255,255,255,0.3);border: 1px solid black;padding:15px;margin: 15px 0">
+                        <p><strong>Answer:</strong>
+                        <pre><code>1
+1
+0</code></pre>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="https://codepen.io/anythingcodes/pen/PjoQxE?editors=0010" class="solution solution__lesson-3" target="_blank">View CodePen &raquo;</a>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Promises</h1>
+            <aside class="notes">
+                A promise represents the eventual result of some sort of operation, typically asynchronous response. Could be animation or anything like that.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Problems with Asynchronous Requests</h2>
+            <div class="fragment-progression">
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises.svg" alt="Promises Start">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__1.svg" alt="Promises Step 1">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__2.svg" alt="Promises Step 2">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__3.svg" alt="Promises Step 3">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__4.svg" alt="Promises Final">
+                </div>
+            </div>
+            <aside class="notes">
+                <p>Promises address this problem. We don't know how long <code>makeRequest</code> will take</p>
+                <p>JavaScript has no way of pausing code</p>
+                <p>JavaScript engines are <span class="green">single-threaded</span> — only one piece of code is executed at a time and placed in a <span class="green">job queue</span></p>
+                <p>A promise specifies some code to be executed later, and whether the code succeeded or failed</p>
+                <p><span class="green">Promise</span>: An object with a <code>.then()</code> method that represents an operation whose result may be unknown. Whoever has access to the object can use the ".then()" method to add callbacks to be notified about the successful completion or failure of the operation.</p>
+            </aside>
+        </section>
+
+        <section>
+            <h2>The Ideal Scenario</h2>
+            <div class="fragment-progression">
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__es6__1.svg" alt="Promises Step 1">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__es6__2.svg" alt="Promises Step 2">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__es6__3.svg" alt="Promises Step 3">
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram__promises__es6__4.svg" alt="Promises Final Step">
+                </div>
+            </div>
+
+            <aside class="notes">
+                ONLY after request is resolved, then work with the data variable. Main goal: execute line by line, but occasionally wait for network request to complete.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Three Promise States</h2>
+            <div class="fragment-progression">
+                <div class="fragment">
+                    <img src="dist/img/es6-promise-states.svg" alt="Promises States Initial Step" />
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/es6-promise-states__1.svg" alt="Promises Step 1" />
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/es6-promise-states__2.svg" alt="Promises Step 2" />
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/es6-promise-states__3.svg" alt="Promises Step 3" />
+                </div>
+            </div>
+            <aside class="notes">You have control over when something is resolved or rejected.</aside>
+        </section>
+
+        <section>
+            <h2>Creating a Promise</h2>
+            <a class="fragment" href="https://codepen.io/anythingcodes/pen/awbKPO?editors=0010" target="_blank">View CodePen &raquo;</a>
+            <ul class="small">
+                <li class="fragment">
+                    You'll need:
+                    <ol>
+                        <li class="fragment">The Promise object, which accepts a callback function (called the <span class="green">executor</span>) with <code>resolve</code> and <code>reject</code> arguments</li>
+                        <li class="fragment"><code>resolve()</code> and <code>reject()</code> are invoked depending on certain conditions</li>
+                        <li class="fragment"><code>then()</code> and <code>catch()</code>blocks attached to the Promise object</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="small fragment-progression">
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+
+});
+
+
+
+
+
+
+
+                </code></pre>
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+
+});
+
+promise.then(() => {
+  console.log('my resolution message');
+});
+
+
+
+                </code></pre>
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+
+});
+
+promise.then(() => {
+  console.log('my resolution message');
+});
+
+promise.catch(() => {
+  console.log('my rejection message');
+});</code></pre>
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+  resolve(); // outputs 'my resolution message'
+});
+
+promise.then(() => {
+  console.log('my resolution message');
+});
+
+promise.catch(() => {
+  console.log('my rejection message');
+});</code></pre>
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+  reject(); // outputs 'my rejection message'
+});
+
+promise.then(() => {
+  console.log('my resolution message');
+});
+
+promise.catch(() => {
+  console.log('my rejection message');
+});</code></pre>
+                <pre class="fragment"><code class="javascript">const promise = new Promise((resolve, reject) => {
+  resolve(5); // chain callbacks and pass info between them
+})
+  .then((value) => {
+    console.log(value); // 5
+  })
+  .catch(() => {
+    console.log('my rejection message');
+  });
+
+                </code></pre>
+            </div>
+            <p>&nbsp;</p>
+
+            <p class="orange info small fragment">Always include a rejection handler! Otherwise your promise may silently fail.</p>
+
+            <aside class="notes">
+                <ul>
+                    <li>Recommendation is to chain them, and indent like so</li>
+                    <li>[[PromiseValue]] is a private symbol. It's an internal property. You cannot access it directly. Native promises may only be unwrapped in then() with promises or asynchronously in generally.</li>
+                </ul>
+
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <p>Using Promises</p>
+            <div class="clear">
+                <div class="halfblock">
+                    <h3>Activity 1</h3>
+                    <p data-height="187" data-theme-id="0" data-slug-hash="qjByPj" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Promises Activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/qjByPj/">Promises Activity</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <a href="https://codepen.io/anythingcodes/pen/gROjGd?editors=0010" target="_blank" class="solution__lesson-3 solution">View Solution</a>
+                </div>
+                <div class="halfblock">
+                    <h3>Activity 2</h3>
+                    <p data-height="187" data-theme-id="0" data-slug-hash="JJoJRK" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Promises with an API" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/JJoJRK/">Promises with an API</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <a href="https://codepen.io/anythingcodes/pen/zzxzEq?editors=0010" target="_blank" class="solution solution__lesson-3">View Solution</a>
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <h2>Grouping Multiple Promises</h2>
+            <p class="fragment">Combine promises in an iterable, such as an array</p>
+            <ol>
+                <li class="fragment">
+                    <code>Promise.all()</code> waits for <span class="green">all</span> promises in the group to fulfill
+                </li>
+                <li class="fragment">
+                    <code>Promise.race()</code> is fulfilled when <span class="green">the fastest</span> promise in the group is fulfilled
+                </li>
+            </ol>
+
+            <aside class="notes">
+                In CodePen, log the promise following these steps:
+                <ol>
+                    <li>console.log(thePromise) to show the pending state</li>
+                    <li>Add if(true) conditional</li>
+                    <li>Chain then()s to show how one value can be passed to another</li>
+                    <li>Underscore that you should ALWAYS put a catch() statement</li>
+                </ol>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Promise.all()</h2>
+            <p class="fragment">The returned promise is fulfilled when <span class="green">all</span> promises in the iterable are fulfilled</p>
+            <p class="fragment">Returns an <span class="green">array of result values</span></p>
+            <p class="fragment">If any of the promises in the array fail, the returned promise fails too</p>
+            <div class="fragment" style="min-height:300px;">
+                <p data-height="300" data-theme-id="0" data-slug-hash="ZyEjOY" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Promise.all()" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/ZyEjOY/">Promise.all()</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+            </div>
+            <aside class="notes">
+                If any promise passed to Promise.all() is rejected, the returned promise is immediately rejected without waiting for other promises to complete
+            </aside>
+        </section>
+
+        <section>
+            <h2>Promise.race()</h2>
+            <p class="fragment">Instead of waiting for all promises to be fulfilled like in <code>Promise.all()</code>, a promise using <code>Promise.race()</code> is fulfilled as soon as <span class="green">any</span> promise in the array is fulfilled</p>
+            <div class="fragment" style="min-height:220px;">
+                <p data-height="220" data-theme-id="0" data-slug-hash="eRYjgp" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Promise.race()" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/eRYjgp/">Promise.race()</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+            </div>
+            <aside class="notes">
+                If any promise passed to Promise.all() is rejected, the returned promise is immediately rejected without waiting for other promises to complete
+            </aside>
+        </section>
+
+        <section>
+            <h3>Promise-Based HTTP Requests</h3>
+            <pre class="small"><code class="javascript" contenteditable>function request(url) {
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = function() {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(JSON.parse(xhr.response));
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function() {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
+  });
+}
+
+request('http://json.com'); // returns a promise</code></pre>
+            <aside class="notes">This is very jumbled though, which is why ES6 includes a brand spankin' new API called Fetch, which is automatically promisified</aside>
+        </section>
+
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Fetch</h1>
+        </section>
+
+        <section>
+            <h2>Fetch</h2>
+            <p class="fragment">The <code>fetch()</code> helper <span class="green">returns a promise</span> and is used for HTTP requests</p>
+            <p class="fragment">The initial return value is the Response object; use chaining and the <code>.json()</code> method to get the JSON you need</p>
+
+            <div class="fragment">
+                <pre><code class="javascript">fetch('http://json.com')
+      .then(serverResponse => serverResponse.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err));</code></pre>
+                <p><a href="https://codepen.io/anythingcodes/pen/vZYaaa?editors=0010" target="_blank">Let's take a look &raquo;</a></p>
+            </div>
+            <aside class="notes">
+                Point out that the first return value is the response. Show that you need to call .json(), which returns another promise, to a second <code>then()</code>. Just a quirk of the Fetch API. Unlike standard promises, you can use then() and catch() to just process your request.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <p>Using the Fetch Helper</p>
+            <div style="min-height:250px">
+                <p data-height="250" data-theme-id="0" data-slug-hash="ZyEjmp" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Fetch Activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/ZyEjmp/">Fetch Activity</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+            </div>
+            <a href="https://codepen.io/anythingcodes/pen/XgWBxp" target="_blank" class="solution solution__lesson-4">View Solution</a>
+
+        </section>
+
+
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Generator Functions</h1>
+        </section>
+
+        <section>
+            <h2>When might you use a generator function?</h2>
+            <p class="fragment">When there's a <span class="orange">distinct transition</span>, e.g. when you're awaiting a response from an external service</p>
+            <p class="fragment">When you need to <span class="orange">save your place within a function</span> and get back to that specific place later</p>
+            <p class="fragment">When you need to <span class="orange">pause execution</span> while you get data elsewhere or run some other code</p>
+        </section>
+
+        <section>
+            <h2>What is it?</h2>
+            <p class="fragment small">Say we want to run some errands at three stores: the grocery store, hardware store, and a cafe. Each time we enter a store, we'll spend time retrieving items.</p>
+
+            <div class="fragment-progression">
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__1.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__2.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__3.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__4.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__5.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__6.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__7.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__8.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__9.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip__10.svg" alt="Shopping trip with generator functions" />
+                </div>
+                <div class="fragment" style="background-color:white;">
+                    <img src="dist/img/diagram__generator-shopping-trip.svg" alt="Shopping trip with generator functions" />
+                </div>
+            </div>
+            <p class="small fragment">Each time we visit a store, time passes until we <code>yield</code> some items, then pick up where we left off in our shopping trip</p>
+            <a href="https://codepen.io/anythingcodes/pen/XgdXJL" target="_blank" class="small fragment">View CodePen &raquo;</a>
+
+        </section>
+
+        <section>
+            <h2>Making a generator function</h2>
+            <ul>
+                <li class="fragment">A generator function returns an <span class="green">iterator</span></li>
+                <li class="fragment">Generator functions look like regular functions, but have an asterisks (<code>*</code>) between <code>function</code> and its name:</li>
+            </ul>
+
+            <pre class="fragment small">
+                <code class="javascript">function *createIterator() {
+  // generator function body here
+}
+
+// generator functions are called like regular functions but return an iterator
+const iterator = createIterator();</code>
+            </pre>
+
+        </section>
+
+        <section>
+            <h2>Yielding and Pausing</h2>
+
+            <ul style="list-style: none;margin:0;" class="small">
+                <li class="fragment">Within the generator function, the <code>yield</code> keyword specifies the value to be returned with each iteration</li>
+            </ul>
+            <pre class="fragment small"><code class="javascript">function *createIterator() {
+  yield 30;
+  yield 31;
+  yield 32;
+}</code></pre>
+            <ul style="list-style: none;margin:0;" class="small">
+                <li class="fragment">To return the next <code>yield</code> value, call <code>yourIterator.next()</code> to return an object formatted like <code>{ value: yieldValue, done: trueOrFalse}</code></li>
+            </ul>
+            <pre class="fragment small"><code class="javascript">function *createIterator() {
+  yield 30;
+  yield 31;
+  yield 32;
+}
+
+const iterator = createIterator();
+console.log(iterator.next()); // { value: 30, done: false }
+console.log(iterator.next()); // { value: 31, done: false }
+console.log(iterator.next()); // { value: 32, done: false }
+
+// subsequent calls
+console.log(iterator.next()); // { value: undefined, done: true }</code></pre>
+
+            <aside class="notes">
+                Each time <code>yield</code> finishes returning a value, the generator function pauses execution. You can do anything you'd like before the next <code>next()</code> call and pick up where you left off at that place in the generator function
+            </aside>
+        </section>
+
+
+        <!--<section>
+            <h2>The <code>next()</code> return value</h2>
+            <pre class="fragment small"><code class="javascript" contenteditable>function *createIterator() {
+  yield 30;
+  yield 31;
+  yield 32;
+}
+
+const iterator = createIterator();
+console.log(iterator.next()); // { value: 30, done: false }
+console.log(iterator.next()); // { value: 31, done: false }
+console.log(iterator.next()); // { value: 32, done: false }
+
+// subsequent calls
+console.log(iterator.next()); // { value: undefined, done: true }</code></pre>
+            <ol>
+                <li class="fragment"><code>value</code>: the value of the resulting <code>yield</code> statement</li>
+                <li class="fragment"><code>done</code>: true if <code>yourIterator.next()</code> is called after the last value has been returned or the function has returned</li>
+            </ol>
+        </section>-->
+
+        <!--<section>
+            <h2>Terms</h2>
+            <ol>
+                <li><span class="green">Iterator</span><span class="fragment">: An object designed for iteration</span>
+                    <ul>
+                        <li class="fragment">Has a <code>next()</code> method that <span class="orange">returns a result object</span> containing 2 properties:
+                            <ol>
+                                <li class="fragment"><code>value</code>: The next value</li>
+                              <li class="fragment"><code>done</code>: A boolean that's true when there are no more values to return</li>
+                            </ol>
+                    </ul>
+                </li>
+                <li><span class="green">Generator Function</span><span class="fragment">: A function that <span class="orange">returns an iterator</span></span>
+                    <ul>
+                        <li class="fragment">Made by placing a <code>*</code> after the <code>function</code> keyword</li>
+                        <li class="fragment">Uses a <code>yield</code> keyword, which specifies what values he resulting iterator should return when <code>next()</code> is called</li>
+                        <li class="fragment">Sometimes called <span class="green">generators</span></li>
+                    </ul>
+                </li>
+            </ol>
+            <aside class="notes">Mind-bending and not very straightforward. Not the easiest thing in the world! Don't worry if you don't get it immediately.</aside>
+        </section>-->
+
+        <!--<section>
+            <h2>Modifying Values</h2>
+            <pre class="fragment small"><code class="javascript">function *createUserIterator(username) {
+	const id = yield getIDFromAPI(username);
+	yield getProfileFromAPI(id);
+}
+
+function getIDFromAPI(username) {
+	// placeholder API request
+	return 4;
+}
+
+function getProfileFromAPI(id) {
+	// placeholder API request
+	return { id, bio: 'Just a very cool person' };
+}
+
+// Initiate the iterator
+const userIterator = createUserIterator('cool_person');
+
+// Store the user ID based on the API results
+const userId = userIterator.next().value;
+
+// Pass in the user ID, which will set the value of 'id' (line 2)
+// A value passed to next() will be treated as the result of the
+// last yield expression that paused the generator.
+const profile = userIterator.next(userId).value;
+console.log(profile); // {id: 4, bio: "Just a very cool person"}</code></pre>
+            <a href="https://codepen.io/anythingcodes/pen/JJGmjr?editors=0010" target="_blank">View CodePen &raquo;</a>
+        </section>-->
+
+        <section>
+            <h2>Why generator functions?</h2>
+            <p class="fragment"><img src="dist/img/but-why.gif" alt="But why?" /></p>
+            <ol>
+                <li class="fragment">
+                    Can be entered and exited multiple times
+                    <ul>
+                        <li class="fragment"><span class="orange">Pause</span> in the middle, one or many times, and <span class="orange">resume later</span>, allowing other code to run during pauses</li>
+                    </ul>
+                </li>
+                <li class="fragment">
+                    Pairs well with <span class="green">asynchronous operations</span>
+                    <ul>
+                        <li class="fragment">Turn asynchronous code into more logical synchronous-looking code</li>
+                        <li class="fragment">Cancel asynchronous operations</li>
+                    </ul>
+                </li>
+            </ol>
+            <aside class="notes">
+                <ul>
+                    <li>Normally a function runs and returns something and then is done. Generator functions can run some code, return a value, and go right back into the function at the same place that we left off.</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Preventing callback hell</h2>
+
+            <div class="clear fragment" style="margin-top:0;">
+                <div class="halfblock">
+                    <h6 class="green underlined">Callback Hell</h6>
+                    <pre class="small"><code class="javascript">function copyFile (source, dest, callback) {
+  fs.exists(source, function (exists) {
+    if (!exists) return callback('Source does not exist')
+    fs.exists(dest, function (exists) {
+      if (exists) return callback('Dest already exists')
+      fs.readFile(source, function (err, data) {
+        if (err) return callback(err)
+        fs.writeFile(dest, data, function (err) {
+          return callback(err)
+        })
+      })
+    })
+  })
+}</code></pre>
+                    <p class="fragment">
+
+                        <img src="dist/img/callback-hell-dog.gif" alt="Callback hell dog" />
+                    </p>
+                </div>
+                <div class="halfblock fragment">
+                    <h6 class="green underlined">Generator Functions</h6>
+                    <pre class="small"><code class="javascript">const copyFile = watt(function *(source, dest, next) {
+  if (!(yield fs.exists(source, next.arg(0)))) throw 'Source does not exist'
+  if (yield fs.exists(dest, next.arg(0))) throw 'Dest already exists'
+  var data = yield fs.readFile(source, next)
+  yield fs.writeFile(dest, data, next)
+})</code></pre>
+                    <a class="small" style="clear: left;display: block;" href="https://github.com/mappum/watt" target="_blank">Source: <code>watt</code> library &raquo;</a>
+                    <p>&nbsp;</p>
+                    <a class="fragment" href="http://embed.plnkr.co/ttOCrNLWR3GncFlRU2ur/" target="_blank">Let's take a look &raquo;</a>
+                </div>
+
+
+
+            </div>
+
+        </section>
+
+        <section>
+            <h3>Generator Functions (v5 in <a href="http://embed.plnkr.co/ttOCrNLWR3GncFlRU2ur/" target="_blank">Plunkr</a>): A Visual </h3>
+
+            <div>
+                <a href="dist/img/diagram-generator-function__chart.svg" target="_blank">
+                    <img src="dist/img/diagram-generator-function__chart.svg" alt="Chart of an ES6 generator function in an API response chain" style="max-height:78vh;" />
+                </a>
+            </div>
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Iterables</h1>
+        </section>
+
+        <section>
+            <h2>Creating Iterables</h2>
+            <p class="fragment">By default, objects you create are not iterable</p>
+            <p class="fragment">Make them iterable with a <code>[Symbol.iterator]</code> property containing a generator function and <code>for-of</code> loop:</p>
+            <pre class="fragment small"><code class="javascript">const team = {
+  members: ['Sam', 'Tam', 'Lam'],
+  [Symbol.iterator]: function *(){
+    for (let member of this.members) {
+      yield member;
+    }
+  }
+};</code></pre>
+            <p class="fragment">Use <span class="orange">concise object methods</span> to trim it down further:</p>
+            <pre class="fragment small"><code class="javascript">const team = {
+  members: ['Sam', 'Tam', 'Lam'],
+  *[Symbol.iterator](){
+    for (let member of this.members) {
+      yield member;
+    }
+  }
+};</code></pre>
+            <aside class="notes">
+                Useful when you have a custom object and need to iterate over particular properties in that object only -- and need to exclude others, or don't care about them being in the output. <strong>Iterable vs. iterator</strong>: An Iterable is a simple representation of a series of elements that can be iterated over. It does not have any iteration state such as a "current element". Instead, it has one method that produces an Iterator. An Iterator is the object with iteration state. It lets you check if it has more elements using hasNext() and move to the next element (if any) using next().
+            </aside>
+        </section>
+
+        <section>
+            <h2>When would we use iterables?</h2>
+            <p class="fragment">Parent and child nodes</p>
+            <div class="fragment-progression">
+                <div class="fragment">
+                    <img src="dist/img/diagram-iterator__1.svg" alt="Iterators with a delivery or project team" />
+                </div>
+                <div class="fragment">
+                    <img src="dist/img/diagram-iterator.svg" alt="Iterators with teams" />
+                </div>
+            </div>
+
+            <p class="fragment"><a href="https://codepen.io/anythingcodes/pen/GEZZJY?editors=0010" target="_blank">Let's take a look &raquo;</a></p>
+
+            <p class="solution__lesson-4 solution"><a href="https://codepen.io/anythingcodes/pen/JJXXdy?editors=0010" target="_blank">View Solution &raquo;</a></p>
+
+            <aside class="notes">
+                Note that aray helpers DO NOT work with generators, so you can't yield from inside a callback. That's why you need to use the for-of loop again. Mention that you'll post the solution after class.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Iterables and Trees</h2>
+            <p class="fragment">
+                <img src="dist/img/diagram-iterator-complex.svg" alt="Complex JavaScript node list using iterables" />
+            </p>
+            <aside class="notes">
+                Seen everywhere:
+                <ul>
+                    <li>Single comment and threaded conversations (Slack, Reddit, etc.)</li>
+                    <li>DOM elements</li>
+                    <li>Post as parent node with child comment nodes</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Sets and Maps</h1>
+        </section>
+
+        <section>
+            <h2>Sets and Maps</h2>
+            <p class="fragment"><span class="blue">Set</span>: An ordered list of <span class="orange">unique</span> values. Allows fast access to the data it contains.</p>
+            <pre class="fragment small"><code class="javascript">const set = new Set([1, 2, 3, 4, 5, 5, 5, 5]);
+console.log(set.size); // 5</code></pre>
+            <pre class="fragment small"><code class="javascript">set.add(6);
+console.log(set.size); // 6</code>
+            </pre>
+            <p class="fragment"><span class="blue">Map</span>: An ordered list of key-value pairs, where the key and value can be any type.</p>
+            <pre class="fragment small"><code class="javascript">const map = new Map();
+map.set('title', 'JS206: Intro to ES6');
+map.set('group', 'GDI');
+
+console.log(map.get('title')); // JS206: Intro to ES6
+console.log(map.get('group')); // GDI</code></pre>
+            <aside class="notes">Map: You could have a key of 5 and a key of "5" and they'd be different because they're different types.</aside>
+        </section>
+        <section>
+            <h2>Built-In Iterators</h2>
+            <ul class="small">
+                <li><code>keys()</code> returns an iterator whose values are the keys contained in the collection</li>
+                <li><code>entries()</code> returns an iterator whose values are key-value pairs</li>
+                <li><code>values()</code> returns an iterator whose values are the values of the collection</li>
+
+            </ul>
+            <div style="min-height:346px">
+                <p data-height="346" data-theme-id="0" data-slug-hash="rwezxg" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Built-in iterators for Sets, Maps, and objects in ES6" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/rwezxg/">Built-in iterators for Sets, Maps, and objects in ES6</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+            </div>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Classes</h1>
+        </section>
+
+        <section>
+            <h2>Classes</h2>
+            <div class="clear">
+                <div class="halfblock fragment">
+                    <h3 class="green underlined">ES5:</h3>
+                    <pre class="small"><code class="javascript">function Vehicle(type) {
+  this.type = type;
+}
+
+Vehicle.prototype.logType = function() {
+  console.log(this.type);
+};
+
+var car = new Vehicle('car');
+car.logType(); // 'car'
+
+console.log(car instanceof Vehicle); // true
+console.log(car instanceof Object); // true</code></pre>
+                    <p class="small fragment">called <span class="blue">"creating a custom type"</span></p>
+                </div>
+                <div class="halfblock fragment">
+                    <h3 class="green underlined">ES6:</h3>
+                    <pre class="small"><code class="javascript">class Vehicle {
+  constructor(type) {
+    this.type = type;
+  }
+
+  logType() {
+    console.log(this.type);
+  }
+}
+const car = new Vehicle('car');
+car.logType(); // 'car'
+
+console.log(car instanceof Vehicle); // true
+console.log(car instanceof Object); // true</code></pre>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <p class="small fragment green info">You don't need commas between the elements of a class</p>
+
+            <aside class="notes">In ES5, we only had class-like structures. Involved creating a constructor and assigning methods to the constructor's prototype, an approach commonly referred to as creating a custom type. Why use classes?
+                <ul>
+                    <li>Class declarations, unlike function declarations, are not <span class="orange">hoisted</span>; they behave like <code>let</code> declarations</li>
+                    <li>All code inside class declarations runs in strict mode automatically</li>
+                    <li>Calling the class constructor without <code>new</code> throws an error</li>
+                    <li>Attempting to overwrite the class name within a class method throws an error</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Derived Classes</h2>
+            <p class="fragment small"><span class="blue">Derived classes</span>: Classes that inherit from other classes</p>
+            <p class="fragment small">Within the derived class's <code>class {}</code> definition, use the <code>extends</code> keyword to specify the base class. Then access the base class constructor by calling <code>super()</code>.</p>
+            <pre class="fragment small"><code class="javascript">class Rectangle {
+  constructor(length, width) {
+    this.length = length;
+    this.width = width;
+  }
+
+  getArea() {
+    return this.length * this.width;
+  }
+}</code></pre>
+            <pre class="fragment small"><code class="javascript">class Square extends Rectangle {
+  constructor(length) {
+    super(length, length); // calls the base class constructor
+  }
+}
+
+const square = new Square(5);
+console.log(square.getArea()); // 25</code></pre>
+
+
+            <aside class="notes">
+                Inheritance -- no true object inheritance, but there is prototypal inheritance. If you ask 5 different engineers how it works, you’ll get 5 different answers. This is ES6’s solution to prototypal inheritance. Whenever you use a class, under the hood, you’re still using prototypal inheritance.
+            </aside>
+        </section>
+
+        <section class="activity" data-background="rgb(6, 116, 123)">
+            <h2>Activity</h2>
+            <p>Classes and Derived Classes</p>
+            <div class="clear">
+                <div class="halfblock" style="min-height:265px">
+                    <h3>Activity 1</h3>
+                    <p data-height="265" data-theme-id="0" data-slug-hash="WOwEMY" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Classes" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/WOwEMY/">Classes</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <p><a href="https://codepen.io/anythingcodes/pen/vZGJRJ?editors=0011" target="_blank" class="solution solution__lesson-4">View Solution</a></p>
+                </div>
+                <div class="halfblock" style="min-height:265px">
+                    <h3>Activity 2</h3>
+                    <p data-height="265" data-theme-id="0" data-slug-hash="EXKyOJ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Shop Activity - Classes and Derived Classes" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/EXKyOJ/">Shop Activity - Classes and Derived Classes</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                    <a href="https://codepen.io/anythingcodes/pen/YQqWdw?editors=0010" target="_blank" class="solution solution__lesson-4">View Solution</a>
+                </div>
+            </div>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Encapsulating Code with Modules</h1>
+        </section>
+
+        <section>
+            <h2>Modules</h2>
+
+            <p class="fragment">JavaScript has an error-prone <span class="orange">share everything</span> approach to loading code</p>
+            <p class="fragment"><span class="blue">Modules</span> are individual files that <span class="green">package and encapsulate</span> individual pieces of functionality (variables, functions, and classes)</p>
+            <p class="fragment">Export and import only the bindings you need rather than everything in a file</p>
+            <p>&nbsp;</p>
+            <p class="fragment orange">🌟 No more global scope pollution!</p>
+            <aside class="notes">Each module runs in strict mode. The "share evenything" approach makes code more error-prone, confusing, and difficult to troubleshoot.</aside>
+        </section>
+
+        <section>
+            <h2>Exporting</h2>
+            <ul>
+                <li class="fragment">Use the <code>export</code> keyword before elements you'd like to expose in a file</li>
+            </ul>
+            <pre class="fragment small"><code class="javascript">// myExports.js</code></pre>
+            <pre class="small fragment"><code class="javascript">// export variables
+export let description = 'GDI Fan';
+export const threshold = 7;
+
+// export functions
+export function multiply(a, b) {
+  return a * b;
+}
+
+// export classes
+export class Rectangle {
+  constructor(length, width) {
+    this.length = length;
+    this.width = width;
+  }
+}</code></pre>
+
+            <pre class="fragment small"><code class="javascript">// private to the module
+function sum(a, b) {
+  return a + b;
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>Importing</h2>
+            <ul>
+                <li class="fragment">Access the functionality in another module by using the <code>import</code> keyword</li>
+                <li class="fragment">Each <code>import</code> statement requires:
+                    <ol>
+                        <li class="fragment">the functionality you're importing</li>
+                        <li class="fragment">the module name (typically the file name)</li>
+                    </ol>
+                </li>
+                <li class="fragment">Always place <code>import</code> statements at the <span class="green">top</span> of a file</li>
+            </ul>
+            <pre class="fragment small"><code class="javascript">// index.js</code></pre>
+            <pre class="small fragment"><code class="javascript">import { Rectangle, description, multiply } from './myExports.js';
+
+const shape = new Rectangle(6, 8);
+console.log(description); // 'GDI Fan'
+console.log(multiply(3, 5)); // 15</code></pre>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Transpiling Setup</h1>
+        </section>
+
+        <section class="activity__challenge" data-background="#d2ccfc">
+            <h2>🎉 Final Activity</h2>
+            <h3>ES6 Transpilation and WebPack Setup</h3>
+            <ol class="small">
+                <li>Install Node.js version 6. Make sure it's installed by typing <code>node -v</code> in your favorite command line tool (such as Terminal or X11 on a Mac, or cmd or Git Bash on Windows).</li>
+                <li>Now get transpiling! Follow along with the instructions at <strong><a href="http://tiny.cc/gdies6-final" target="_blank">tiny.cc/gdies6-final</a></strong></li>
+                <li>Keep the group posted with any roadblocks or solutions you come up with — the first time you transpile can take some time!</li>
+            </ol>
+            <p>&nbsp;</p>
+            <p><img src="dist/img/transpiling.svg" alt="Transpiling" style="padding: 10px;max-height: 150px;background-color:rgba(255,255,255,0.67);" /></p>
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;font-size:3.7em;">Additional Resources</h1>
+        </section>
+
+        <section>
+            <h2>Additional Resources</h2>
+            <div class="clear fragment">
+                <div style="float:left;width:33.333%;">
+                    <h6>Congrats!</h6>
+                    <p><img src="dist/img/congrats.gif" alt="Tina Fey high five congrats gif" /></p>
+                </div>
+                <div style="float:left;width:30%;margin-left:3.333%;" class="small">
+                    <h6>Challenges &amp; Exercises</h6>
+                    <ul>
+                        <li><a href="http://es6katas.org/" target="_blank">ES6 Katas</a>: Learn ES6 by doing it</li>
+                        <li><a href="http://marijnhaverbeke.nl/talks/es6_falsyvalues2015/exercises/">ES6 Sandbox</a></li>
+                        <li><a href="http://hackerrank.com">HackerRank</a></li>
+                        <li><a href="http://interviewcake.com">InterviewCake</a></li>
+                    </ul>
+
+                    <p>&nbsp;</p>
+                    <h6>Cheatsheets</h6>
+                    <ul>
+                        <li><a href="https://github.com/anythingcodes/gdi-es6-javascript/tree/gh-pages/resources/cheatsheets" target="_blank">Course Cheatsheets</a></li>
+                        <li><a href="https://github.com/bevacqua/es6" target="_blank">ES6 Overview in 350 Bullet Points</a></li>
+                        <li><a href="https://codetower.github.io/es6-features/" target="_blank">Interactive ES6 Features List</a></li>
+                        <li><a href="https://github.com/DrkSephy/es6-cheatsheet" target="_blank">DrkSephy's ES6 Cheatsheet</a></li>
+                    </ul>
+                </div>
+
+                <div style="float:left;width:30%;margin-left:3.333%;" class="small">
+                    <h6>Books</h6>
+                    <ul>
+                        <li><a href="http://a.co/3Z9KWEr" target="_blank">Beautiful JavaScript</a></li>
+                        <li><a href="http://a.co/bG5R4N8" target="_blank">Understanding ECMAScript 6</a></li>
+                    </ul>
+
+                    <p>&nbsp;</p>
+
+                    <h6>Keeping in the Loop</h6>
+                    <ul>
+                        <li><a href="http://2ality.com/" target="_blank">2ality</a></li>
+                        <li><a href="https://ponyfoo.com/" target="_blank">PonyFoo</a></li>
+                        <li><a href="https://medium.com/" target="_blank">Medium</a> and <a href="http://youtube.com">YouTube</a> channels</li>
+                        <li>Meetups: Girl Develop It, Node.js, Women Who Code, Tech Ladies, etc.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section data-background="#f05b62">
+            <h1 style="color: #fafafa;">Thank you all!</h1>
+        </section>
+
+    </div>
+    <footer>
+        <div class="copyright">
+            View Slides at <a href="http://tiny.cc/gdies6">tiny.cc/gdies6</a> &nbsp; - &nbsp;
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+        </div>
+    </footer>
+</div>
+
+
+<script src="dist/js/head.min.js"></script>
+<script src="dist/js/babel.min.js"></script>
+<script src="dist/js/reveal.min.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+    // Optional reveal.js plugins
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true }
+    ]
+  });
+
+</script>
+<script async src="//production-assets.codepen.io/assets/embed/ei.js"></script>
+</body>
+</html>

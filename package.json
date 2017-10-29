@@ -1,0 +1,49 @@
+{
+  "name": "wwc-es6-javascript",
+  "version": "2.6.2",
+  "description": "Slides for a Women Who Code ES6 JavaScript course",
+  "homepage": "http://anything.codes/wwc-es6-javascript",
+  "scripts": {
+    "test": "grunt test",
+    "start": "grunt"
+  },
+  "author": {
+    "name": "Liz Shaw",
+    "web": "http://anything.codes"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anythingcodes/wwc-boston-es6.git"
+  },
+  "engines": {
+    "node": "~0.8.0"
+  },
+  "dependencies": {
+    "babel-standalone": "^6.24.0",
+    "express": "~2.5.9",
+    "mustache": "~0.7.2",
+    "socket.io": "~0.9.13",
+    "underscore": "~1.5.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "babel-preset-es2015": "^6.24.1",
+    "cssnano": "^3.9.1",
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-qunit": "^1.2.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-zip": "~0.7.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
