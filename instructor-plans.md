@@ -1,3 +1,7 @@
+## Activity
+
+[This CodePen](https://codepen.io/anythingcodes/pen/xdGNZg?editors=0010) will be used as the basis for the activity and any trivia questions.
+
 ## Schedule
 
 - 6:30-6:35: Intro &amp; Welcome
