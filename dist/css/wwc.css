@@ -1,10 +1,10 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url("https://fonts.googleapis.com/css?family=Hind");
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Hind", sans-serif;
   line-height: 1.35;
   color: #19191A; }
 
@@ -273,6 +273,8 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
   display: inline-block;
   margin: 0 0 0 1em; }
+  .reveal ul ul, .reveal ul ol, .reveal ol ul, .reveal ol ol {
+    width: 100%; }
 
 .reveal ul ul {
   display: block;
@@ -400,5 +402,11 @@ table.data {
     position: absolute; }
     .fragment-progression .fragment:first-of-type {
       position: static; }
+
+/* CodePen Overrides */
+#cp_embed_xdGNZg {
+  position: absolute;
+  top: -8.5%;
+  left: 0; }
 
 /*# sourceMappingURL=wwc.css.map */

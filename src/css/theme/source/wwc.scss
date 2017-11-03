@@ -294,6 +294,9 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
   display: inline-block;
   margin: 0 0 0 1em;
+  ul, ol {
+    width: 100%;
+  }
 }
 
 .reveal ul ul {
@@ -464,4 +467,11 @@ table.data{
       position: static;
     }
   }
+}
+
+/* CodePen Overrides */ 
+#cp_embed_xdGNZg {
+  position: absolute;
+  top: -8.5%;
+  left: 0;
 }
