@@ -5,16 +5,33 @@
 ## Schedule
 
 - 6:30-6:35: Intro &amp; Welcome
-- 6:35-7pm: Instructions
+- 6:35-7pm: Presentation part 1
+    - Background and terminology for ES6
+    - Six functional enhancements of ES6
 - 7-8:20pm: Hands-On Activity
-- 8:20-8:30pm: Wrap-up, reflection, next steps
+- 8:20-8:25pm: Presentation part 2
+    - Transpilation
+- 8:25-8:30pm: Wrap-up, reflection, next steps
 - 8:30-9pm: Clean up 
 
 ## Class Format
 - Break students into groups of 4-5
 - Each group receives a printout with a set of activities. Each activity is worth X points. At the end, one team wins!
 
-## Activity Breakdown/Plans
+## Requirements for completing Activity:
+- const and let
+- Classes and subclasses (Product, Cart, ProductInCart)
+- Destructuring
+- Default parameters
+    - Enforcing mandatory parameters
+- Template strings
+- Common array helpers (find, map, forEach, perhaps the less well-known reduce)
+- Fetch helper
+
+## Temporary Notes
+
+> Please ignore these while I get content in order :)
+
 1. Our Activity
     - Discuss structure, show demo or mockup/screenshot, etc.
 2. Scopes and Variables: `const` and `let`
@@ -43,13 +60,3 @@
 15. After Activity: Transpiling 
     - Show production-style demo
     - Link to [Node activity](http://tiny.cc/gdies6-final) (?)
-
-## Requirements for completing Activity:
-- const and let
-- Classes and subclasses (Product, Cart, ProductInCart)
-- Destructuring
-- Default parameters
-    - Enforcing mandatory parameters
-- Template strings
-- Common array helpers (find, map, forEach, perhaps the less well-known reduce)
-- Fetch helper
