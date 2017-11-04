@@ -1133,6 +1133,87 @@ console.log(sum); // 16</code></pre>
 				<section data-background="#029393">
 					<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>Encourage the ✨powers✨ of object-oriented programming</h1>					
 				</section>
+
+				<section>
+						<h2>Classes</h2>
+						<div class="clear">
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES5:</h3>
+								<pre class="small"><code class="javascript">function Vehicle(type) {
+  this.type = type;
+}
+			
+Vehicle.prototype.logType = function() {
+  console.log(this.type);
+};
+			
+var car = new Vehicle('car');
+car.logType(); // 'car'
+			
+console.log(car instanceof Vehicle); // true
+console.log(car instanceof Object); // true</code></pre>
+								<p class="small fragment">called <span class="blue">"creating a custom type"</span></p>
+							</div>
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES6:</h3>
+								<pre class="small"><code class="javascript">class Vehicle {
+  constructor(type) {
+    this.type = type;
+  }
+			
+  logType() {
+    console.log(this.type);
+  }
+}
+const car = new Vehicle('car');
+car.logType(); // 'car'
+			
+console.log(car instanceof Vehicle); // true
+console.log(car instanceof Object); // true</code></pre>
+							</div>
+						</div>
+						<p>&nbsp;</p>
+						<p class="small fragment green info">You don't need commas between the elements of a class</p>
+			
+						<aside class="notes">In ES5, we only had class-like structures. Involved creating a constructor and assigning methods to the constructor's prototype, an approach commonly referred to as creating a custom type. Why use classes?
+							<ul>
+								<li>Class declarations, unlike function declarations, are not <span class="orange">hoisted</span>; they behave like <code>let</code> declarations</li>
+								<li>All code inside class declarations runs in strict mode automatically</li>
+								<li>Calling the class constructor without <code>new</code> throws an error</li>
+								<li>Attempting to overwrite the class name within a class method throws an error</li>
+							</ul>
+						</aside>
+					</section>
+			
+					<section>
+						<h2>Derived Classes</h2>
+						<p class="fragment small"><span class="blue">Derived classes</span>: Classes that inherit from other classes</p>
+						<p class="fragment small">Within the derived class's <code>class {}</code> definition, use the <code>extends</code> keyword to specify the base class. Then access the base class constructor by calling <code>super()</code>.</p>
+						<pre class="fragment small"><code class="javascript">class Rectangle {
+  constructor(length, width) {
+    this.length = length;
+    this.width = width;
+  }
+			
+  getArea() {
+    return this.length * this.width;
+  }
+}</code></pre>
+						<pre class="fragment small"><code class="javascript">class Square extends Rectangle {
+  constructor(length) {
+    super(length, length); // calls the base class constructor
+  }
+}
+			
+const square = new Square(5);
+console.log(square.getArea()); // 25</code></pre>		
+			
+						<aside class="notes">
+							Inheritance -- no true object inheritance, but there is prototypal inheritance. If you ask 5 different engineers how it works, you’ll get 5 different answers. This is ES6’s solution to prototypal inheritance. Whenever you use a class, under the hood, you’re still using prototypal inheritance.
+						</aside>
+					</section>
+			
+					
 		
 				<section class="activity small" data-background="#007a7c">
 						<h2>Our Activity</h2>
