@@ -153,58 +153,17 @@
 						</ul>
 					</aside>
 				</section>
-
-				<!--<section>
-					<h2>Why use ES6?</h2>
-					<ul style="font-size:90%;">
-						<li>Sure, there are handy new methods, syntax, and easier-to-read code, but...</li>
-						<li class="fragment">Top JavaScript libraries will be written in ES6. If you aren't familiar with ES6, you'll be at a disadvantage when trying to read documentation and build new features.</li>
-						<li class="fragment">Backwards compatible</li>
-						<li class="fragment">Integrates nicely with modern build tools</li>
-					</ul>
-					<p class="fragment"><br /><span class="orange">🌟 Above all, it's the new standard.</span> This means that, in the near future, ES6 will be standard in each browser.</p>
-					<aside class="notes">
-						<ul>
-							<li>Bigger leap than what existed in previous standards</li>
-							<li>Everything relevant going forward will use ES6</li>
-						</ul>
-					</aside>
-				</section>-->
 				
 				<section>
 					<h2>What ES6 can do for you</h2>
 					<ol>
 						<li class="fragment">Fix scoping problems
-							<!-- <ul>
-								<li class="fragment">we'll talk about <span class="orange">new variable declarations</span> and how <span class="orange">arrow functions</span> demystify <code>this</code></li>
-							</ul> -->
 						</li>
-						<li class="fragment">New functionality for working with arrays and objects
-								<!-- <ul>
-									<li class="fragment">we'll talk about new <span class="orange">array helpers</span>, how to <span class="orange">destructure</span>, the <span class="orange">property initializer shorthand</span>, and the <span class="orange">rest and spread operators</span></li>
-								</ul> -->
-							</li>
-						<li class="fragment">Write cleaner, easier-to-understand code
-							<!-- <ul>
-								<li class="fragment">we'll talk about <span class="orange">template strings</span></li>
-							</ul> -->
-						</li>
-						
-						<li class="fragment">Write more succinct methods with better error handling
-							<!-- <ul>
-								<li class="fragment">we'll talk about providing <span class="orange">default values</span>, writing <span class="orange">concise methods</span>, and how to <span class="orange">enforce mandatory parameters</span></li>
-							</ul> -->
-						</li>						
-						<li class="fragment">A built-in helper for making AJAX requests
-							<!-- <ul>
-								<li class="fragment">we'll talk about the <span class="orange">fetch</span> helper</li>
-							</ul> -->
-						</li>
-						<li class="fragment">Encourage the ✨powers✨ of object-oriented programming
-								<!-- <ul>
-									<li class="fragment">we'll talk about <span class="orange">classes</span></li>
-								</ul> -->
-							</li>
+						<li class="fragment">Write cleaner, easier-to-understand code</li>
+						<li class="fragment">New functionality for working with arrays and objects</li>						
+						<li class="fragment">Write more succinct methods with better error handling</li>						
+						<li class="fragment">A built-in helper for making AJAX requests</li>
+						<li class="fragment">Encourage the ✨powers✨ of object-oriented programming</li>
 					</ol>
 				</section>
 
@@ -303,74 +262,139 @@
 						Reality is that ES6 has brought much-needed functionality to the table. Block-scoping is a game-changer. Huge benefit to const/let is that they do not pollute your global scope (<code>window</code> in browsers). Much safer.
 					</aside>
 				</section>
-				
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 2 )</span>New functionality for working with arrays and objects</h1>					
-				</section>
-
-				<!-- here -->
-
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 3 )</span>Write cleaner, easier-to-understand code</h1>					
-				</section>
-
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
-				</section>
-
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
-				</section>
-
-				<!--
-				<section class="activity" data-background="#007a7c">
-					<h2>Activity</h2>
-					<p>Complete activities 1 and 2 in CodePen. Be sure to fork the pen first if you'd like to save your work to your account!</p>
-
-					<div class="clear">
-						<div class="halfblock" style="min-height:265px;">
-							<h3>Activity 1</h3>
-							<p data-height="265" data-theme-id="0" data-slug-hash="rmmjXP" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="const and let exercise" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/rmmjXP/">const and let exercise</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-							<a href="http://codepen.io/anythingcodes/pen/dWrgrB" target="_blank" class="solution solution__lesson-1">View Solution</a>
-						</div>
-						<div class="halfblock" style="min-height:265px;">
-							<h3>Activity 2</h3>
-							<p data-height="265" data-theme-id="0" data-slug-hash="eWaoxY" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="const and let exercise #2" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/eWaoxY/">const and let exercise #2</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-							<a href="http://codepen.io/anythingcodes/pen/aWrxXN?editors=0012" target="_blank" class="solution solution__lesson-1">View Solution</a>
-						</div>
-					</div>
-
-				</section>
-
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;">String Helpers</h1>
-				</section>
 
 				<section>
-					<h2>String Helper Methods</h2>
-					<p>Step aside, <code>indexOf()</code> &mdash; there are now easier ways to identify substrings:</p>
-					<ol>
-						<li class="fragment"><code>includes()</code> returns <span class="green">true</span> or <span class="green">false</span> depending on if the given text is found anywhere within the string</li>
-						<li class="fragment"><code>startsWith()</code> returns <span class="green">true</span> or <span class="green">false</span> depending on if the given text is found at the beginning of the string</li>
-						<li class="fragment"><code>endsWith()</code> returns <span class="green">true</span> or <span class="green">false</span> depending on if the given text is found at the end of the string</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>String Helper Methods</h2>
-					<p class="fragment">Each method accepts two arguments:</p>
-					<ol>
-						<li class="fragment">the <span class="green">text to search for</span></li>
-						<li class="fragment">an <span class="green">optional index</span> from which to start the search
-							<ul>
-								<li class="small fragment"><code>includes()</code> and <code>startsWith()</code> <span class="orange">include</span> the character at that index, while <code>endsWith()</code>  <span class="orange">excludes</span> the character at that index</li>
-							</ul>
+					<h2>How does ES6 help with function scope issues?</h2>
+					<ul>
+						<li class="fragment">With <span class="blue">arrow functions</span></li>
+						<li class="fragment">Usually used to fix issues with the <code>this</code> keyword</p>
 						</li>
-					</ol>
-					<div class="fragment" style="min-height: 300px;">
-						<p data-height="270" data-theme-id="0" data-slug-hash="aWWJPZ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="String helper methods: includes(), startsWith(), endsWith()" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/aWWJPZ/">String helper methods: includes(), startsWith(), endsWith()</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+					</ul>
+					
+					<div class="clear fragment" style="margin-top: 0.5em;">
+						
+						<div class="halfblock">
+							<h3 class="green">ES5</h3>
+							<pre><code contenteditable class ="javascript">var getMessage = function(name) {
+  return 'Hello ' + name + '!';
+}</code></pre>
+						</div>
+						<div class="halfblock fragment">
+							<h3 class="green">ES6</h3>
+							<pre><code contenteditable class ="javascript">const getMessage = name => 'Hello ' + name;</code></pre>
+						</div>
+		
 					</div>
-					<aside class="notes">Case sensitivity still matters. We aren't going to do any exercises around these, but they're included for reference. Good to be aware of. The only thing to note is how the index is handled in <code>endsWith()</code></aside>
+					<div class="clear small">
+		
+						<div class="halfblock">
+							<h3 class="fragment">Making an arrow function:</h3>
+							<ol>
+								<li class="fragment">Remove the word <code>function</code></li>
+								<li class="fragment">Place a fat arrow (<code>=></code>) after parameters</li>
+							</ol>
+						</div>
+						<div class="halfblock">
+							<h3 class="blue fragment">Trimming it down:</h3>
+							<ul>
+								<li class="fragment">If there's only <span class="green">one parameter</span>, remove the surrounding parentheses <code>()</code></li>
+								<li class="fragment">If there's only <span class="green">one expression</span> in the function body, remove <code>{ }</code> and <code>return</code> (<span class="orange">implicit return</span>)</li>
+							</ul>
+						</div>
+					</div>
+		
+					<aside class="notes">
+						<ul>
+							<li>Refactor ES5 version in front of students. Ask about <code>const</code> and template strings</li>
+							<li>Skinny arrow is <code>-></code> like in Ruby and Coffeescript</li>
+							<li>If there are zero or more than one args, you need to include parentheses, e.g. <code>const sum = () => retVal;</code></li>
+						</ul>
+		
+					</aside>
+				</section>
+
+				
+				<section>
+						<h2>The <code>this</code> keyword</h2>
+						<p>The <code>this</code> keyword determines context</p>
+						<pre class="small"><code class="javascript" contenteditable>const obj = {
+  name: 'Zeta',
+  getName: function() {
+    console.log(this.name);
+  }
+};
+			
+obj.getName(); // Zeta</code></pre>
+						<aside class="notes">
+							We saw the <code>this</code> keyword earlier with Fruit Baskets. Seems straightforward when you have a smaller codebase and more simple objects, but when you introduce multiple scopes and functions it quickly spirals out of control.
+						</aside>
+					</section>
+			
+					<section>
+						<h2>There's <code>this</code> One Problem</h2>
+			
+						<p class="fragment">Binding and changing <code>this</code> in functions is one of the most common JavaScript errors</p>
+			
+						<div class="fragment clear" style="margin-top:.5em;">
+							<p><img src="dist/img/computer-frustration.gif" alt="Computer frustration" class="right" />It's possible to mistakenly affect one object when you meant to affect another</p>
+							<pre class="fragment" style="display: inline-block;"><code class="xml">var self = this;</code></pre>
+							<pre class="fragment" style="display: inline-block;"><code class="xml">var _this = this;</code></pre>
+							<pre class="fragment" style="display: inline-block;"><code class="xml">var that = this;</code></pre>
+							<p class="fragment">🤦</p>
+						</div>
+			
+						<!--<p class="fragment"><a href="https://codepen.io/anythingcodes/pen/BRvYQp/?editors=0010" target="_blank">Let's take a look &raquo;</a></p>-->
+			
+						<aside class="notes">This is straightforward with a small codebase but it quickly spirals out of control with nested functions.</aside>
+					</section>
+			
+					<section>
+						<h2>What is <code>this</code> problem?</h2>
+			
+						<h3>Let's take a look</h3>
+						<div style="min-height:300px;" class="fragment">
+							<p data-height="300" data-theme-id="0" data-slug-hash="dZMqQZ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow functions and `this`" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/dZMqQZ/">Arrow functions and `this`</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+							<!-- <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/QvqReo?editors=0010#0" target="_blank">View Solution</a> -->
+			
+						</div>
+			
+						<aside class="notes">
+							<ul>
+								<li>Ask students: What would you expect to happen?</li>
+								<li>Ask students: What are some ways around the problem that you've seen?</li>
+								<li>Refer to it as 'the this keyword' and then 'the keyword' going forward</li>
+								<li>The call to this.logEvent() is broken because <code>this</code> is a reference to the object that was the target of the event (<code>document</code>)</li>
+								<li>Ask students to transform existing code to arrow function per earlier steps
+									<ul>
+										<li>Can fix by binding <code>this</code> to logEvent(), but this creates a new function whose <code>this</code> is bound to the current <code>this</code>.</li>
+										<li>Could also declare <code>var self = this;</code></li>
+									</ul>
+								</li>
+							</ul>
+						</aside>
+					</section>
+			
+					<section>
+						<h2>Can arrow functions help?</h2>
+			
+						<ul>
+							<li class="fragment">Arrow functions <span class="green">do not have a <code>this</code> 🌟</li>
+							<li class="fragment">The value of <code>this</code> is <span class="orange">lexically fetched</span> from the scope the arrow function sits inside</li>
+						</ul>
+						<div style="min-height:200px;" class="fragment">
+							<p data-height="200" data-theme-id="0" data-slug-hash="qmPGJN" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Arrow functions and `this`" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/qmPGJN/">Arrow functions and `this`</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+							<!-- <a class="solution solution__lesson-2" href="https://codepen.io/anythingcodes/pen/QvqReo?editors=0010#0" target="_blank">View Solution</a> -->
+						</div>
+
+						<aside class="notes">
+							<ul>
+								<li>Arrow functions are a better way to fix the issue! ES6's purpose is to solve this problem and stop worrying about context.</li>
+							</ul>
+						</aside>
+					</section>
+			
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 2 )</span>Write cleaner, easier-to-understand code</h1>
 				</section>
 
 				<section>
@@ -380,14 +404,14 @@
 					<div class="clear">
 						<div class="halfblock fragment">
 							<h3 class="green underlined">ES5:</h3>
-							<pre><code class="xml">'<div>' +
+							<pre><code class="xml">var html = '<div>' +
   '<h1>Hello ' + str + '!</h1>' +
 '</div>';</code></pre>
 							<p class="right small fragment">becomes</p>
 						</div>
 						<div class="halfblock fragment">
 							<h3 class="green underlined">ES6:</h3>
-							<pre><code class="xml">`<div>
+							<pre><code class="xml">const html = `<div>
   <h1>Hello ${str}!</h1>
 </div>`;</code></pre>
 						</div>
@@ -409,66 +433,21 @@
 					<aside class="notes">
 						Can't use <code>if</code> because that's a statement, not an expression. Ternary operators are expressions.
 					</aside>
+				</section>		
+				
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 3 )</span>New functionality for working with arrays and objects</h1>					
 				</section>
 
-				<section class="activity" data-background="#007a7c">
-					<h2>Activity</h2>
-					<p>Refactor this code to use template strings.</p>
-					<div style="min-height: 300px">
-						<p data-height="300" data-theme-id="0" data-slug-hash="MmmoWo" data-default-tab="js,result" data-user="anythingcodes" data-embed-version="2" data-pen-title="Template Strings Activity" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/MmmoWo/">Template Strings Activity</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-					</div>
-					<a href="http://codepen.io/anythingcodes/pen/EmMdqG" target="_blank" class="solution__lesson-1 solution">View Solution</a>
-					<aside class="notes">Focus on the <code>html</code> variable</aside>
+				
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
 				</section>
 
-				<section class="activity__challenge" data-background="#d2ccfc">
-					<h2>At-Home Challenge</h2>
-					<h3>Fruit Basket</h3>
-					<div class="small clear">
-						<div class="halfblock">
-							<pre><code contenteditable class ="javascript" >var fruit = 'apple';
-
-(function basket(){
-    var fruit = 'banana';
-    console.log(fruit);
-})();
-
-console.log(fruit);
-
-var fruitBasket = {
-    fruit: 'mango',
-    getFruit: function(){
-      console.log(fruit);
-      fruit = 'orange';
-    }
-};
-fruitBasket.getFruit();
-console.log(fruit);</code></pre>
-
-						</div>
-						<div class="halfblock">
-							<p>What would the following output to the console and why?</p>
-						</div>
-					</div>
-
-					<aside class="notes">
-						Common interview question!
-					</aside>
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
 				</section>
 
-				<section class="hide-pdf">
-					<h2>Next Week</h2>
-					<ul>
-						<li>Review at-home challenge from today's class</li>
-						<li>Arrow Functions</li>
-						<li>Arrow Functions and <code>this</code></li>
-						<li>Array Helpers</li>
-						<li>Altering Arrays</li>
-					</ul>
-
-					<p>&nbsp;</p>
-					<p class="small blue"><em>Remember to do the at-home challenge!</em></p>
-				</section> -->
 				<section class="hide-pdf">
 					<h2>Questions</h2>
 					<div style="font-size:1200%; height:100%;" class="blue">?
