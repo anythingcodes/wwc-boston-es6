@@ -109,7 +109,7 @@
 
 				
 				<section data-background="#029393">
-					<h1 style="color: #fafafa;font-size:3.7em;">Background</h1>
+					<h1 style="color: #fafafa;">Background</h1>
 				</section>
 				
 				
@@ -154,7 +154,7 @@
 					</aside>
 				</section>
 
-				<section>
+				<!--<section>
 					<h2>Why use ES6?</h2>
 					<ul style="font-size:90%;">
 						<li>Sure, there are handy new methods, syntax, and easier-to-read code, but...</li>
@@ -169,141 +169,102 @@
 							<li>Everything relevant going forward will use ES6</li>
 						</ul>
 					</aside>
-				</section>
+				</section>-->
 				
 				<section>
 					<h2>What ES6 can do for you</h2>
-					<ol class="small">
-						<li class="fragment">Fix scoping Problems
-							<ul>
-								<li class="fragment">we'll talk about <span class="orange">new variable declarations</span> and how <span class="orange">arrow functions</span> demystify <code>this</code></li>
-							</ul>
-						</li>
-						<li class="fragment">Use cleaner syntax that's easier to read &amp; understand
-								<ul>
-									<li class="fragment">we'll talk about <span class="orange">template strings</span></li>
-								</ul>
-						</li>
-						<li class="fragment">Arrays and objects are easier to work with
-								<ul>
-									<li class="fragment">we'll talk about new <span class="orange">array helpers</span>, how to <span class="orange">destructure</span>, the <span class="orange">property initializer shorthand</span>, and the <span class="orange">rest and spread operators</span></li>
-								</ul>
-						</li>
-						<li class="fragment">Write cleaner methods with better error handling
-								<ul>
-									<li class="fragment">we'll talk about providing <span class="orange">default values</span>, writing <span class="orange">concise methods</span>, and how to <span class="orange">enforce mandatory parameters</span></li>
-								</ul>
-						</li>
-						<li class="fragment">Use the ✨powers✨ of object-oriented programming
-							<ul>
-								<li class="fragment">we'll talk about <span class="orange">classes</span></li>
-							</ul>
-						</li>
-						<li class="fragment">Easily make asynchronous requests
-							<ul>
-								<li class="fragment">we'll talk about the <span class="orange">fetch</span> helper</li>
-							</ul>
-						</li>
-					</ol>
-				</section>
-				<!--
-				<section>
-					<h2>Topics</h2>
 					<ol>
-						<li>Scopes &amp; Variables</li>
-						<li>Template Strings</li>
-						<li>Arrow Functions &amp; struggles with <code>this</code></li>
-						<li>Common array helpers</li>
-						<li>Function parameters</li>
-						<li>The Rest &amp; Spread Operators</li>
-						<li>Shorthanded Syntax</li>
-						<li>Destructuring</li>
-						<li>Default values</li>
-						<li>Classes</li>
-						<li>Asynchronous requests</li>
-						<li>Transpiling</li>
+						<li class="fragment">Fix scoping problems
+							<!-- <ul>
+								<li class="fragment">we'll talk about <span class="orange">new variable declarations</span> and how <span class="orange">arrow functions</span> demystify <code>this</code></li>
+							</ul> -->
+						</li>
+						<li class="fragment">New functionality for working with arrays and objects
+								<!-- <ul>
+									<li class="fragment">we'll talk about new <span class="orange">array helpers</span>, how to <span class="orange">destructure</span>, the <span class="orange">property initializer shorthand</span>, and the <span class="orange">rest and spread operators</span></li>
+								</ul> -->
+							</li>
+						<li class="fragment">Write cleaner, easier-to-understand code
+							<!-- <ul>
+								<li class="fragment">we'll talk about <span class="orange">template strings</span></li>
+							</ul> -->
+						</li>
+						
+						<li class="fragment">Write more succinct methods with better error handling
+							<!-- <ul>
+								<li class="fragment">we'll talk about providing <span class="orange">default values</span>, writing <span class="orange">concise methods</span>, and how to <span class="orange">enforce mandatory parameters</span></li>
+							</ul> -->
+						</li>						
+						<li class="fragment">A built-in helper for making AJAX requests
+							<!-- <ul>
+								<li class="fragment">we'll talk about the <span class="orange">fetch</span> helper</li>
+							</ul> -->
+						</li>
+						<li class="fragment">Encourage the ✨powers✨ of object-oriented programming
+								<!-- <ul>
+									<li class="fragment">we'll talk about <span class="orange">classes</span></li>
+								</ul> -->
+							</li>
 					</ol>
-
 				</section>
 
-				
 				<section data-background="#029393">
-					<h1 style="color: #fafafa;font-size:3.7em;">Transpiling</h1>
-				</section>
-
-				<section>
-					<h2><span class="green">Transpiling</span> = Transformation + Compiling</h2>
-					<p>&nbsp;</p>
-					<img src="dist/img/transpiling.svg" alt="Transpiling" />
-					<div class="transpiler clear">
-						<div class="halfblock">
-							<h3 class="green">Before: ES6</h3>
-							<pre><code contenteditable class ="javascript transpiler__input">const getMessage = () => 'Hello World';</code></pre>
-						</div>
-						<div class="halfblock">
-							<h3 class="green">After: ES5</h3>
-							<pre><code class="javascript transpiler__output">Waiting...</code></pre>
-						</div>
-					</div>
-					<p>&nbsp;</p>
-					<aside class="notes">Point out how this code block is being transpiled to that via Babel. Break the ES6 code as an example. Ask who's seen a <code>src</code> and <code>dist</code> folder. Both of these are creating a function that returns 'Hello World'. You and your team can focus on writing readable, less error-prone code in fewer lines. Enforces good coding practices behind the scenes (<code>'use strict';</code>). Allows you to focus on writing readable code in less lines. Build tools (e.g. WebPack) integrate nicely with this workflow and can be used to minify the ES5 result, add linting, add prefixes to CSS automatically, etc. [[[Browsers don’t yet implement natively a lot of ES6+ features, and developers want to innovate on what JavaScript is. This means they’ve built tools like Babel that implement futuristic JavaScript features and compile down to ES5.]]]
-					</aside>
-				</section>
-
-				<section>
-					<h2>Benefits to Transpiling</h2>
-					<ul>
-						<li class="fragment">Browser support</li>
-						<li class="fragment">No need to wait for browsers/engines to catch up with the ECMAScript specification</li>
-						<li class="fragment">Focus on writing clean, easy-to-read code &mdash; compile it to a cross-browser-compatible format</li>
-						<li class="fragment">JavaScript will continue to <a href="https://dayssincelastjavascriptframework.com/" target="_blank">evolve constantly</a>; without transpilation, you'll miss out on innovations that make JavaScript more effective, efficient, and robust</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Transpiling Setup</h2>
-					<p>You can set this up on your machine using Node.js. For now, CodePen can use Babel to transpile ES6 for us.</p>
-					<p><img src="dist/img/codepen-babel.gif" style="border: 1px solid black;max-height:40vh;" alt="Using the Babel transpiler in CodePen" /></p>
-				</section>
-
-				-->
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;font-size:3.7em;">Scopes & Variables</h1>
+					<h1 style="color: #fafafa;"><span class="ordinal">( 1 )</span>Fix scoping problems</h1>
 					<aside class="notes">Can someone tell me what scope means in the context of programming in general?</aside>
 				</section>
 
 				<section>
 					<h2>Scopes 🔬</h2>
-					<ol class="small">
-						<li>
-							<strong class="green">Block Scopes (a.k.a. lexical scopes):</strong>
-							<pre><code contenteditable class="javascript">{
-  // anything within { } that isn't a function
-}
-
-if (isPhiladelphia) {
-  var alwaysSunny = true;
-}</code></pre>
-							<ul class="small">
-								<li><span class="blue">Examples:</span> <code>{ }</code>, <code>if () { }</code>, <code>for() {}</code>, <code>while() { }</code>, etc.</li><li><span class="blue">Purpose:</span> Declare variables as close as possible, as local as possible, to where they will be used.</li>
-							</ul>
-						</li>
-						<li class="fragment">
-							<strong class="green">Function Scopes:</strong>
-							<pre><code contenteditable class="javascript">function func() {
-  // function required
-}</code></pre>
-							<ul class="small"><li><span class="blue">Purpose:</span> Code wrapped in a function effectively "hides" any enclosed variable or function declarations from the outside scope.</li></ul>
-						</li>
-					</ol>
-					<p style="margin-top:.3em;" class="fragment"><code>var</code> <span class="orange">only respects function scopes</span></p>
-					<p class="fragment small info"><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md" target="_blank">Function vs. Block Scope &raquo;</a></p>
+					<div class="clear">
+						<div class="halfblock halfblock-reverse">
+							<ol class="small fragment">			
+								<li>
+									<strong class="">Function Scopes:</strong>
+											
+									<p>Variables defined inside of a function are <span class="blue">not accessible</span> from the outside scope</p>
+											<pre class="fragment"><code contenteditable class="javascript">      function myFunctionScope() {
+        var a = 'alpha';
+        return a;
+      }</code></pre>
+				<pre class="fragment"><code contenteditable class="javascript">      console.log(a);										
+				</code></pre>
+								</li>
+								<li class="fragment">
+									<strong class="">Block Scopes (a.k.a. lexical scopes):</strong>
+									<p>Any variables declared within <code>{ }</code> are <span class="blue">accessible only within the <code>{ }</code></span></p>
+												<pre><code contenteditable class="javascript">      var myBlockScope = true;
+      if (myBlockScope) {
+        var z = 'zeta';
+      }</code></pre>
+				<pre class="fragment"><code contenteditable class="javascript">      console.log(z);										
+					</code></pre>
+								</li>
+							</ol>
+						</div>
+						<div class="halfblock halfblock-reverse">
+							
+							<div class="fragment" style="text-align: center;">
+								<p>
+									<img class="" src="dist/img/wait-what.gif" alt="Wait what?" />				
+								</p>
+								<p>What is going on here?!</p>
+							</div>
+							<p class="fragment" style="margin-top:1em;"><code>var</code> <span class="blue">ignores block scope</span> and only respects function scope</p>	
+						</div>
+					</div>
+				
+					<div class="fragment small">
+						<p><a href="https://codepen.io/anythingcodes/pen/ooxdPG?editors=0010" target="_blank">CodePen Example &raquo;</a></p>
+						<p class="info"><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md" target="_blank">Article: Function vs. Block Scope &raquo;</a></p>
+					</div>
+					
 					<aside class="notes">
 						 Most languages use block scopes. This made programming in JavaScript unintuitive and inconsistent for many who were used to block scoping.
 
 						<ul>
-							<li>Ask what the other form of scope is BEFORE the function scope definition shows.</li>
-							<li><code>alwaysSunny</code> exists in the global scope</li>
+							<li>What would the first console.log output? firstVariable is not defined</li>
+							<li>What would the second console.log output? zeta</li>
+							<li>Ask for block scope examples, e.g. <code>{ }</code>, <code>if () { }</code>, <code>for() {}</code>, <code>while() { }</code>, etc.</li><li></li>
 							<li>A <strong>function</strong> cordons off an area. Plain old <code>{}</code> does not. Any variables defined in a function remain scoped there, and aren't accessible outside.</li>
 							<li>When you see the word <strong>function</strong>, it should trigger the fact that a new scope/context has been created. Any variables defined there are scoped to that area.</li>
 						</ul>
@@ -311,133 +272,28 @@ if (isPhiladelphia) {
 				</section>
 
 				<section>
-					<h2>Function Scope Problems</h2>
-					<p><code>var</code> variables are <span class="green">function-scoped</span>.<br />They ignore block scoping.</p>
-					<div style="min-height: 200px;">
-						<p data-height="200" data-theme-id="dark" data-slug-hash="GmqavN" data-default-tab="js,result" data-user="anythingcodes" data-embed-version="2" data-pen-title="Block-scoping: ES5 (Before)" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/GmqavN/">Block-scoping: ES5 (Before)</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-						<a class="solution solution__lesson-1" href="http://codepen.io/anythingcodes/pen/zwBQEX?editors=0010" target="_blank">View Solution</a>
-					</div>
-
-					<p>To fake block scoping, an <span class="green">immediately-invoked function expression (IIFE)</span> is often used</p>
-
-					<aside class="notes">
-						<ol>
-							<li>DON'T open console, ask students:
-								<ol>
-									<li>What would the output be?</li>
-									<li>What if we want it to say Alpha, and then Beta? How can we solve this? (one potential solution: IIFE)</li>
-								</ol>
-							</li>
-							<li>{ ... } is perfectly valid JavaScript, but you probably don't see it often &mdash; before ES6, it was basically useless. Not anymore!</li>
-							<li>Ask what the output would be. DON'T open the console first.</li>
-						</ol>
-					</aside>
-				</section>
-
-				<section>
-					<h2>The <em>let</em> Declaration</h2>
-					<ul>
-						<li class="fragment"><span class="blue">Block-scoped</span> <code>{ }</code>, unlike the function-scoped <code>var</code>
-						</li>
-
-						<li class="fragment">Value <span class="green">can</span> be reassigned</li>
-					</ul>
-					<div class="fragment" style="min-height:200px;">
-						<p data-height="200" data-theme-id="dark" data-slug-hash="WjxBLy" data-default-tab="js,result" data-user="anythingcodes" data-embed-version="2" data-pen-title="Block-scoping with let (Before)" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/WjxBLy/">Block-scoping with let (Before)</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-						<a class="solution solution__lesson-1" href="http://codepen.io/anythingcodes/pen/WjxVQb?editors=0011" target="_blank">View Solution</a>
-					</div>
-					<p class="fragment">Way easier than using an IIFE! 🏆</p>
-
-					<aside class="notes">
-						Doesn't have to use a function or IIFE to create a new scope
-					</aside>
-
-				</section>
-
-				<!--
-				<section class="activity" data-background="#007a7c">
-					<h2>Activity</h2>
-
-					<p>Instructions can be found by editing the below pen on CodePen. Be sure to fork the pen first if you'd like to save your work to your account!</p>
-					<div class="clear">
-						<div class="halfblock" style="min-height: 280px;">
-							<h3>Activity 1</h3>
-							<p data-height="280" data-theme-id="dark" data-slug-hash="OmYGzQ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Block-scoping" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/OmYGzQ/">Block-scoping</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-							<a class="solution solution__lesson-1" href="http://codepen.io/anythingcodes/pen/zwQXRY?editors=0012" target="_blank">View Solution</a>
-						</div>
-						<div class="halfblock" style="min-height: 280px;">
-							<h3>Activity 2</h3>
-							<p data-height="280" data-theme-id="dark" data-slug-hash="LyZwRr" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Block-scoping with let (Before)" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/LyZwRr/">Block-scoping with let (Before)</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-							<a class="solution solution__lesson-1" href="http://codepen.io/anythingcodes/pen/OmXKRK?editors=0011" target="_blank">View Solution</a>
-						</div>
-					</div>
-
-					<aside class="notes">
-						<ul>
-							<li>A common interview question. Essentially happening because there's only one <code>i</code> in the outer scope that was closed over, instead of a new <code>i</code> for each iteration's function to close over.</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>The <em>const</em> Declaration</h2>
-					<ul>
-						<li class="fragment"><span class="blue">Block-scoped</span>, like <code>let</code></li>
-						<li class="fragment">Value <span style="color:red;">cannot</span> be reassigned
-							<ul>
-								<li class="fragment"><code>const</code> stands for <span class="orange">constant</span></li>
-							</ul>
-						</li>
-						<li class="fragment">Must be initialized on declaration</li>
-						<li class="fragment">Communicates your variable's intent to other devs</li>
-						<li class="fragment">Helps catch unintended changes</li>
-						<li class="fragment">No more <pre style="display: inline-block"><code class="javascript">var PLZ_DONT_CHANGE = 42;</code></pre>🎉</li>
-					</ul>
-					<p>&nbsp;</p>
-					<div class="fragment">
-						<p data-height="120" data-theme-id="dark" data-slug-hash="bWwbKa" data-default-tab="js,result" data-user="anythingcodes" data-embed-version="2" data-pen-title="const (Before)" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/bWwbKa/">const (Before)</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-						<a class="solution solution__lesson-1" href="https://codepen.io/anythingcodes/pen/jmMNpK?editors=0010" target="_blank">View Solution</a>
-					</div>
-					<aside class="notes">
-						Change the CodePen on screen
-					</aside>
-				</section>
-
-				<section>
-					<h2>Modifying Complex Values</h2>
+					<h2>Why is this a problem?</h2>
 					<p class="fragment">
-						Although you can't <span class="orange">reassign</span> a <code>const</code>'s value, <span class="green">contents of complex values</span> (objects &amp; arrays) <strong>can</strong> be modified</p>
-					<div class="fragment-progression">
-						<p class="fragment"><img src="dist/img/const-bindings__step1.gif" alt="const bindings and reassignments" /></p>
-						<p class="fragment">
-							<img src="dist/img/const-bindings__step2.gif" alt="const bindings and reassignments" />
-						</p>
-						<p class="fragment">
-							<img src="dist/img/const-bindings__step3.gif" alt="const bindings and reassignments" />
-						</p>
-						<p class="fragment">
-							<img src="dist/img/const-bindings__step4.gif" alt="const bindings and reassignments" />
-						</p>
-						<p class="fragment">
-							<img src="dist/img/const-bindings__step5.gif" alt="const bindings and reassignments" />
-						</p>
-					</div>
-
+						Unpredictable and hard to control
+					</p>
+					<p class="fragment"><a href="https://codepen.io/anythingcodes/pen/LyZwRr?editors=1010" target="_blank">CodePen Example &raquo;</a></p>	
 					<aside class="notes">
-						The variable doesn't hold a constant array/object. Rather, it holds a constant reference to the array/object. The array/object itself is freely mutable. A const binding that references an object can’t later reference a different value, but the underlying object can indeed mutate.
-					</aside>
-
+						A common interview question. Essentially happening because there's only one <code>i</code> in the outer scope that was closed over, instead of a new <code>i</code> for each iteration's function to close over.
+					</aside>				
 				</section>
 
 				<section>
-					<h2>Modifying Complex Values</h2>
-					<h3>Examples</h3>
-						<p data-height="280" data-theme-id="dark" data-slug-hash="WjGeaJ" data-default-tab="js" data-user="anythingcodes" data-embed-version="2" data-pen-title="Updating the contents of const values" class="codepen">See the Pen <a href="http://codepen.io/anythingcodes/pen/WjGeaJ/">Updating the contents of const values</a> by Liz Shaw (<a href="http://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-
-					<aside class="notes">
-						The variable doesn't hold a constant array/object. Rather, it holds a constant <strong>reference</strong> to the array/object. The array/object itself is freely mutable.
-					</aside>
+					<h2>How does ES6 fix block scoping?</h2>
+					<p class="fragment">Use <code>let</code> and <code>const</code> instead of <code>var</code></p>
+					<ul>
+						<li class="fragment"><code>const</code> is for constants</li>
+						<li class="fragment"><code>let</code> is for variables whose value will change (<a href="https://codepen.io/anythingcodes/pen/WjxBLy/" target="_blank" class="small">Example &raquo;</a>)</li>
+						<li class="fragment">Use <code>const</code> by default, but change to <code>let</code> when you need to change the value</li>
+					</ul>
+					<p class="fragment"><a href="https://codepen.io/anythingcodes/pen/LyZwRr?editors=1010" target="_blank">CodePen Example &raquo;</a></p>
+					
 				</section>
+
 				<section>
 					<h2>Do you still need <code>var</code>?</h2>
 					<p class="fragment">No 😊</p>
@@ -447,7 +303,26 @@ if (isPhiladelphia) {
 						Reality is that ES6 has brought much-needed functionality to the table. Block-scoping is a game-changer. Huge benefit to const/let is that they do not pollute your global scope (<code>window</code> in browsers). Much safer.
 					</aside>
 				</section>
+				
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 2 )</span>New functionality for working with arrays and objects</h1>					
+				</section>
 
+				<!-- here -->
+
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 3 )</span>Write cleaner, easier-to-understand code</h1>					
+				</section>
+
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
+				</section>
+
+				<section data-background="#029393">
+					<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
+				</section>
+
+				<!--
 				<section class="activity" data-background="#007a7c">
 					<h2>Activity</h2>
 					<p>Complete activities 1 and 2 in CodePen. Be sure to fork the pen first if you'd like to save your work to your account!</p>
@@ -468,7 +343,7 @@ if (isPhiladelphia) {
 				</section>
 
 				<section data-background="#029393">
-					<h1 style="color: #fafafa;font-size:3.7em;">String Helpers</h1>
+					<h1 style="color: #fafafa;">String Helpers</h1>
 				</section>
 
 				<section>
