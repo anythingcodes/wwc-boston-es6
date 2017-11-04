@@ -547,13 +547,13 @@ console.log(first, second, third);
 				</section>
 
 				<section>
-						<h2>Default Destructuring Values</h2>
-						<p class="fragment">Set a default value with equal signs (<code>=</code>). This works when destructuring objects and arrays.</p>
-						<h3 class="small fragment blue" style="margin-top: 1em;">An example with objects:</h3>
-						<div class="clear small">
-							<div class="halfblock fragment">
-								<h3 class="green underlined">ES5:</h3>
-								<pre><code class="javascript">var person = {
+					<h2>Default Destructuring Values</h2>
+					<p class="fragment">Set a default value with an equal sign (<code>=</code>). This works when destructuring objects and arrays.</p>
+					<h3 class="small fragment blue" style="margin-top: 1em;">An example with objects:</h3>
+					<div class="clear small">
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES5:</h3>
+							<pre><code class="javascript">var person = {
   name: 'Whitney'
 };
 			
@@ -561,39 +561,424 @@ var name = person.name;
 var active = person.active; // undefined
 			
 console.log(name, active); // Whitney undefined</code></pre>
-								<p class="right small fragment">becomes</p>
-							</div>
-							<div class="halfblock fragment">
-								<h3 class="green underlined">ES6:</h3>
-								<pre><code class="javascript">const person = {
+							<p class="right small fragment">becomes</p>
+						</div>
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES6:</h3>
+							<pre><code class="javascript">const person = {
   name: 'Whitney'
 };
-			
+		
 const { name, active = false } = person;
 console.log(name, active); // Whitney false</code></pre>
-							</div>
 						</div>
-						<aside class="notes">Ask: What do you think you'd use to set a default value? Similar patterns in ES6 — you can combine tons of different patterns/syntax, so try to give everything a shot.</aside>
-					</section>
-			
-				
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
-				</section>
-
-				<section data-background="#029393">
-					<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
-				</section>
-
-				<section class="hide-pdf">
-					<h2>Questions</h2>
-					<div style="font-size:1200%; height:100%;" class="blue">?
-						<div class="clear"></div>
 					</div>
-					<aside class="notes">Can always email me!</aside>
+					<aside class="notes">Ask: What do you think you'd use to set a default value? Similar patterns in ES6 — you can combine tons of different patterns/syntax, so try to give everything a shot.</aside>
 				</section>
 
-			</div>
+
+			<section>
+				<h2>Array Helpers</h2>
+				<p>Tons of new methods that can be applied to arrays</p>
+				<table class="data compact fragment">
+					<tr>
+						<th></th>
+						<th>Array Helper</th>
+						<th>Use it to...</th>
+						<th>Returns</th>
+					</tr>
+					<tr>
+						<td>✔️</td>
+						<td><code class="javascript">arr.forEach((element, index, array) => { });</code></td>
+						<td>loop through elements in an array</td>
+						<td><code>undefined</code></td>
+					</tr>
+					<tr>
+						<td>️</td>
+						<td><code class="javascript">arr.every((element, index, array) => { });</code></td>
+						<td>check if <span class="blue">every</span> element passes a test</td>
+						<td><code>true||false</code></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><code class="javascript">arr.some((element, index, array) => { });</code></td>
+						<td>check if <span class="blue">some</span> (at least 1) <code>arr</code> elements pass a test</td>
+						<td><code>true||false</code></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><code class="javascript">arr.filter((element, index, array) => { });</code></td>
+						<td>create a new array by <span class="blue">filtering</span> the original array elements</td>
+						<td><code>Array</code></td>
+					</tr>
+					<tr>
+						<td>✔️</td>
+						<td><code class="javascript">arr.map((element, index, array) => { });</code></td>
+						<td>create a new array by <span class="blue">modifying</span> the original array elements</td>
+						<td><code>Array</code></td>
+					</tr>
+					<tr>
+						<td>✔️</td>
+						<td><code class="javascript">arr.find((element, index, array) => { });</code></td>
+						<td>find the <span class="blue">first element that passes a test</span></td>
+						<td>1 element</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><code class="javascript">arr.findIndex((element, index, array) => { });</code></td>
+						<td>find the <span class="blue">index of the first element that passes a test</span></td>
+						<td>1 element</td>
+					</tr>
+					<tr>
+						<td>✔️</td>
+						<td><code class="javascript">arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></td>
+						<td>pass in an <code>initialValue</code> and modify it according to the current <code>element</code> value</td>
+						<td>1 reduced value</td>
+					</tr>
+				</table>
+				<aside class="notes">
+					Convenient methods applied to arrays. We'll go over 4 of these, with checkmarks. Point out that reduce() is the odd one out. It takes different parameters. Note that you don't need to use ALL the parameters, just the ones you need.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Array Helpers</h2>
+				<h3>Moving away from for loops</h3>
+				<ul>
+					<li class="fragment">Easier for other devs to immediately read and understand</li>
+					<li class="fragment">Encourage functional programming</li>
+					<li class="fragment">More compact &mdash; why write more code?</li>
+					<li class="fragment">More maintainable and scalable</li>
+				</ul>
+				<aside class="notes">Nothing wrong with for loops, but you probably don't need them anymore. Array helpers describe your intent more easily to your teammates, so it's a best practice.</aside>
+			</section>
+
+			<section>
+				<h2>forEach</h2>
+				<table class="data compact">
+					<tr>
+						<th>Array Helper</th>
+						<th>Use it to...</th>
+						<th>Returns</th>
+					</tr>
+					<tr>
+						<td><code class="javascript">arr.forEach((element, index, array) => { });</code></td>
+						<td>loop through elements in an array</td>
+						<td><code>undefined</code></td>
+					</tr>
+				</table>
+				<div class="small clear fragment">
+					<div class="halfblock">
+						<h3 class="green">ES5: for loop</h3>
+						<pre><code contenteditable class ="javascript">var names = ['Morgan', 'Taylor', 'Lesley'];
+
+for (var i = 0; i < names.length; i++) {
+  console.log(names[i]);
+}</code></pre>
+					</div>
+					<div class="halfblock fragment">
+						<h3 class="green">ES6: forEach</h3>
+						<pre><code contenteditable class ="javascript">const names = ['Morgan', 'Taylor', 'Lesley'];
+
+names.forEach(function(name, index, array) {
+  console.log(name);
+});</code></pre>
+					</div>
+					<p><a href="http://codepen.io/anythingcodes/pen/KagmxL?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+				</div>
+				<aside class="notes">
+					Activity on this slide: Ask class to arrow functionitize the right-hand ES6 block. Transform it in front of students!
+				</aside>
+			</section>
+
+			<section>
+				<h2>forEach</h2>
+				<code>arr.forEach(iteratorFunction)</code>
+				<pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+  numbers.forEach(function(number, index, array) {
+  console.log(number > 50); // can you get this on one line?
+});</code></pre>
+
+				<div class="clear fragment" style="margin-top:.5em;">
+					<div style="width:25%; font-size:75%;float: left">
+						<p>The iterator function runs once for each element in the array</p>
+					</div>
+
+					<div style="width:75%; float: left">
+						<p><img src="dist/img/diagram-forEach.svg" alt="forEach diagram" style="max-height: 47vh;"/></p>
+					</div>
+				</div>
+
+
+				<aside class="notes">
+					Ask students what they'd expect to see in the console. Code the arrow function version in front of students. Mention that all array helpers in the class will use arrow functions going forward. Clarify how the iterator function automatically receives the current element, in this case <code>number</code>. Point out the convention of using the plural form as the array name (numbers) and the singular form (number) in your arrow function.
+				</aside>
+			</section>
+
+			<section>
+				<h2>map</h2>
+				<table class="data compact">
+					<tr>
+						<th>Array Helper</th>
+						<th>Use it to...</th>
+						<th>Returns</th>
+					</tr>
+					<tr>
+						<td><code class="javascript">arr.map((element, index, array) => { });</code></td>
+						<td>create a new array by <span class="blue">modifying</span> the original array elements</td>
+						<td><code>Array</code></td>
+					</tr>
+				</table>
+				<p>&nbsp;</p>
+				<p class="fragment">You can <span class="blue">assign the resulting array</span> to a variable:<br /><code>const modifiedArr = arr.map(iteratorFunction);</code></p>
+				<div class="small clear fragment">
+					<div class="halfblock">
+						<h3 class="green">ES5: for loop</h3>
+						<pre><code contenteditable class ="javascript">var numbers = [2, 6, 10];
+var halvedNumbers = [];
+
+for (var i = 0; i < numbers.length; i++) {
+  halvedNumbers.push(numbers[i] / 2);
+}
+
+console.log(halvedNumbers); // 1, 3, 5
+</code></pre>
+					</div>
+					<div class="halfblock fragment">
+						<h3 class="green">ES6: map</h3>
+						<pre><code contenteditable class ="javascript" >const numbers = [2, 6, 10];
+
+const halvedNumbers = numbers.map(number => number / 2);
+
+console.log(halvedNumbers); // 1, 3, 5
+</code></pre>
+					</div>
+					<p><a href="http://codepen.io/anythingcodes/pen/MJjoxm?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+				</div>
+				<p class="small orange fragment">No need to create an empty array first! 🎉</p>
+				<aside class="notes">
+					Primary difference between forEach and map: <em>forEach</em> iterates through an array but <span class="orange">doesn't return anything</span>
+				</aside>
+			</section>
+
+			<section>
+				<h2>map</h2>
+				<code>arr.map(iteratorFunction)</code>
+
+				<pre class="small javascript"><code contenteditable>const numbers = [123, 500, -50, 82, 8];
+const decrementedNumbers = numbers.map(number => number - 1);
+console.log(decrementedNumbers); // [ 122, 499, -51, 81, 7 ]</code></pre>
+
+				<div class="clear fragment" style="margin-top:.5em;">
+					<div style="width:25%; font-size:75%;float: left">
+						<p>The iterator function runs once for each element in the array</p>
+						<p class="fragment info blue">Be sure to return a value each iteration!</p>
+					</div>
+
+					<div style="width:75%; float: left">
+						<p><img src="dist/img/diagram-map.svg" alt="map diagram" style="max-height: 47vh;"/></p>
+					</div>
+				</div>
+				<aside class="notes">
+					Difference between forEach() and map(): map() returns an array at the end. Don't use map if you just need to loop through an array. forEach doesn't return anything, but map <em>modifies</em> the previous array values ti create a new array.
+				</aside>
+			</section>
+
+			<section>
+				<h2>find</h2>
+				<table class="data compact">
+					<tr>
+						<th>Array Helper</th>
+						<th>Use it to...</th>
+						<th>Returns</th>
+					</tr>
+					<tr>
+						<td><code class="javascript">arr.find((element, index, array) => { });</code></td>
+						<td>find the <span class="blue">first element that passes a test</span></td>
+						<td>1 element</td>
+					</tr>
+				</table>
+				<p class="fragment"><code>const matchingObject = arr.find(iteratorFunction);</code></p>
+				<div class="small clear fragment">
+					<div class="halfblock">
+						<h3 class="green">ES5: for loop</h3>
+						<pre><code contenteditable class ="javascript">var jobs = [
+  { title: 'Electrician' },
+  { title: 'Developer' },
+  { title: 'Barista' }
+];
+var devJob;
+for (var i = 0; i < jobs.length; i++) {
+  if (jobs[i].title === 'Developer') {
+    devJob = jobs[i];
+	break;
+  }
+}
+console.log(devJob); // { title: 'Developer' }</code></pre>
+					</div>
+					<div class="halfblock fragment">
+						<h3 class="green">ES6: find</h3>
+						<pre><code contenteditable class ="javascript">const jobs = [
+  { title: 'Electrician' },
+  { title: 'Developer' },
+  { title: 'Barista' }
+];
+const devJob = jobs.find(job => job.title === 'Developer');
+console.log(devJob); // { title: 'Developer' }</code></pre>
+						<p class="small"><a href="http://codepen.io/anythingcodes/pen/ggLbMO?editors=0012" target="_blank">CodePen Example &raquo;</a></p>
+					</div>
+
+				</div>
+				<aside class="notes">
+					Don't need to use an if statement, since <code>user.active</code> returns a boolean. Also <code>home.price < 600000</code> returns a boolean.
+				</aside>
+			</section>
+
+			<section>
+				<h2>find</h2>
+				<p><code>arr.find(iteratorFunction)</code></p>
+				<div class="small"><pre class="small"><code contenteditable class ="javascript">const jobs = [
+  { title: 'Electrician' },
+  { title: 'Developer' },
+  { title: 'Barista' }
+];
+const devJob = jobs.find(job => job.title === 'Developer');
+console.log(devJob); // { title: 'Developer' }</code></pre></div>
+
+				<div class="clear fragment" style="margin-top:.5em;">
+					<div style="width:25%; font-size:75%;float: left">
+						<p>Runs until the iterator function returns <code>true</code>. When it does, the element at that index is returned.</p>
+					</div>
+
+					<div style="width:75%; float: left">
+						<p><img src="dist/img/diagram-find.svg" alt="find diagram" style="max-height: 40vh;"/></p>
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h2><code>find()</code> Practical Example</h2>
+				<h3>Single-page web apps</h3>
+				<p><img src="dist/img/single-page-app__find.png" alt="The find helper in a single-page web app" /></p>
+			</section>
+
+			<section>
+				<h2>reduce</h2>
+				<table class="data compact">
+					<tr>
+						<th>Array Helper</th>
+						<th>Use it to...</th>
+						<th>Returns</th>
+					</tr>
+					<tr>
+						<td><code class="javascript">arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></td>
+						<td>pass in an <code>initialValue</code> and modify it according to the current <code>element</code> value</td>
+						<td>1 reduced value</td>
+					</tr>
+				</table>
+				<p class="fragment"><code>const reducedValue = arr.reduce(iteratorFunction, initialValue);</code></p>
+				<div class="clear fragment">
+					<div class="halfblock">
+						<h3 class="green">ES5: for loop</h3>
+						<pre class="small"><code contenteditable class ="javascript">var numbers = [2, 6, 10];
+
+var sum = 0;
+for (var i = 0; i < numbers.length; i++) {
+  sum += numbers[i];
+}
+
+console.log(sum); // 18
+</code></pre>
+					</div>
+					<div class="halfblock fragment">
+						<h3 class="green">ES6: reduce</h3>
+						<pre class="small"><code contenteditable class="javascript" >const numbers = [2, 6, 10];
+
+const sum = numbers.reduce(function(currentSum, number) {
+  return currentSum + number;
+}, 0);
+
+console.log(sum); // 18
+</code></pre>
+					</div>
+					<p><a href="http://codepen.io/anythingcodes/pen/qmVrdK?editors=0012" target="_blank">View CodePen &raquo;</a></p>
+				</div>
+				<aside class="notes">
+					Activity on this slide: Ask class to arrow functionitize the right-hand ES6 block. We saved the weirdest and hardest one for last. But it's the most flexible since you can return any type of object you want &mdash; integer, object with keys, array, anything. One crucial difference is you MUST pass an initial value to reduce.
+				</aside>
+			</section>
+
+			<section>
+				<h2>reduce</h2>
+				<pre class="small"><code class="javascript">// when iteratorFunction is a reference:
+arr.reduce(iteratorFunction, initialValue);
+
+// or when iteratorFunction isn't a reference:
+arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></pre>
+				<p>&nbsp;</p>
+				<p class="fragment">reduce is <span class="orange">slightly different</span> from the other array helpers because it takes <span class="green">two parameters</span>:</p>
+				<ol>
+					<li class="fragment"><code>iteratorFunction</code>
+						<ul>
+							<li class="fragment">The iterator function requires a <code>calculatedValue</code> parameter, which is modified each time and <span class="green">returned each iteration</span></li>
+						</ul>
+					</li>
+					<li class="fragment"><code>initialValue</code> &mdash; used during the first iteration to calculate the next iteration's <code>calculatedValue</code></li>
+				</ol>
+
+				<aside class="notes">Ask students what parts of the call are similar to other array helpers and what are different.</aside>
+
+			</section>
+
+			<section>
+				<h2>reduce in action</h2>
+
+				<p><code class="javascript">arr.reduce(iteratorFunction, initialValue);</code></p>
+				<pre class="small"><code class="javascript" contenteditable>const numbers = [1, 5, 10];
+
+const sum = numbers.reduce(function(calculatedValue, number) {
+  return calculatedValue + number;
+}, 0); // 0 is the initialValue
+
+console.log(sum); // 16</code></pre>
+
+
+				<div class="clear fragment" style="margin-top:.5em;">
+					<div style="width:75%; float: left">
+						<img src="dist/img/diagram-reduce.svg" alt="reduce array helper ES6" />
+					</div>
+					<div style="width:25%;float: left">
+						<p class="small fragment"><a href="https://codepen.io/anythingcodes/pen/rmgJNe?editors=0012" target="_blank">Let's take a look &raquo;</a></p>
+					</div>
+				</div>
+				<aside class="notes">Transform it into an arrow function in front of students. Remove unneeded 'index' and 'array' params. Show how, each iteration, the 'calculatedValue' changes -- it's passed into the function each iteration.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Map and Reduce</h2>
+				<h3>A Sandwich Metaphor</h3>
+				<p><img src="dist/img/sandwiches__map-reduce.jpg" alt="Map and Reduce with sandwiches" /></p>
+			</section>
+			
+			<section data-background="#029393">
+				<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
+			</section>
+
+			<section data-background="#029393">
+				<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
+			</section>
+
+			<section class="hide-pdf">
+				<h2>Questions</h2>
+				<div style="font-size:1200%; height:100%;" class="blue">?
+					<div class="clear"></div>
+				</div>
+				<aside class="notes">Can always email me!</aside>
+			</section>
+
+		</div>
   		<footer>
 			<div class="copyright">
 				<a href="http://tiny.cc/wwces6">tiny.cc/wwces6</a> &nbsp; - &nbsp;
