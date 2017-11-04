@@ -67,7 +67,7 @@
 					</ul>
 				</section>
 
-				<section class="small">
+				<section class="activity small" data-background="#007a7c">
 					<h2>Our Activity</h2>
 					<ul class="small">
 							<li>Slides: <a href="http://tiny.cc/wwces6" target="_blank">http://tiny.cc/wwces6</a></li>
@@ -160,8 +160,7 @@
 						<li class="fragment">Fix scoping problems
 						</li>
 						<li class="fragment">Write cleaner, easier-to-understand code</li>
-						<li class="fragment">New functionality for working with arrays and objects</li>						
-						<li class="fragment">Write more succinct methods with better error handling</li>						
+						<li class="fragment">New functionality for working with arrays and objects</li>
 						<li class="fragment">A built-in helper for making AJAX requests</li>
 						<li class="fragment">Encourage the ✨powers✨ of object-oriented programming</li>
 					</ol>
@@ -434,6 +433,101 @@ obj.getName(); // Zeta</code></pre>
 						Can't use <code>if</code> because that's a statement, not an expression. Ternary operators are expressions.
 					</aside>
 				</section>
+
+				<section>
+					<h2>Concise object methods</h2>
+					<p class="fragment">Object methods no longer need <code>: function</code></p>
+						<div class="clear">
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES5:</h3>
+								<pre><code class="javascript" contenteditable>var dog = {
+  name: 'Boo',
+  bark: function() {
+    console.log('yip!');
+  }
+};
+dog.bark(); // yip!</code></pre>
+								<p class="right small fragment">becomes</p>
+							</div>
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES6:</h3>
+								<pre><code class="javascript">const dog = {
+  name: 'Boo',
+  bark() {
+    console.log('yip!');
+  }
+};
+dog.bark(); // yip!</code></pre>
+							</div>
+						</div>
+						<aside class="notes">Reformat ES5 version in front of students</aside>
+					</section>
+			
+					<section>
+							<h2>Default Parameter Values</h2>
+							<p class="fragment">Using ES5, we could establish default parameter values, but there were some flaws<br /><a href="https://codepen.io/anythingcodes/pen/LyKZRX?editors=0010" target="_blank">View CodePen &raquo;</a></p>
+							<p></p>
+				
+							<div class="clear fragment" style="margin-top:.25em">
+								<div class="halfblock">
+									<h3 class="green underlined">ES5:</h3>
+									<pre style="font-size:76%;"><code class="javascript" contenteditable>function makeRequest(url, timeout, callback) {
+  timeout = timeout || 2000;
+  // what if timeout is 0?
+  callback = callback || function() {};
+  callback();
+}</code></pre>
+									<p class="fragment">becomes</p>
+									<pre style="font-size:76%;" class="fragment"><code class="javascript" contenteditable>function makeRequest(url, timeout, callback) {
+  timeout = (typeof timeout !== 'undefined') ? timeout : 2000;
+  callback = (typeof callback !== 'undefined') ? callback || function() {};
+  callback();
+}</code></pre>
+								</div>
+								<div class="halfblock fragment">
+				
+									<h3 class="green underlined">ES6:</h3>
+									<pre style="font-size:76%;"><code class="javascript" contenteditable>function makeRequest(url, timeout = 2000, callback = () => {}) {
+  callback();
+}</code></pre>
+									<div class="small fragment" style="margin-top:.5em;">
+										<img src="dist/img/its-beautiful.gif" alt="It's beautiful" />
+										<p><em>It's beautiful</em></p>
+									</div>
+								</div>
+							</div>
+				
+							<aside class="notes">
+								<ul>
+									<li>The logical OR operator (<code>||</code>) always returns the second operand when the first is falsy.</li>
+									<li>Ask Class: What happens if timeout is 0? </li>
+									<li>The problem with the first ES5 makeRequest() is that 0 &mdash; a valid timeout &mdash; would be considered falsy and would then change to 2000 instead of 0. Same for the function &mdash; if no callback is passed in, it's undefined. So we have to account for undefined specifically and then assign values.</li>
+									<li>Too much code! ES6 can handle this error-checking for us.</li>
+									<li>makeRequest() expects only the <code>url</code>, the first parameter, to always be passed, which is why there's no default</li>
+								</ul>
+							</aside>
+						</section>
+				
+						<section>
+							<h2>Calling functions with default parameters</h2>
+							<p>Given the following function:</p>
+							<pre class="small"><code class="javascript" contenteditable>function makeRequest(url, timeout = 2000, callback = () => {}) {
+  callback();
+}</code></pre>
+							<div class="fragment">
+								<p>Only <code>url</code> is required. The following calls all work:</p>
+								<pre class="small"><code class="javascript">makeRequest('/api');
+				
+makeRequest('/api', 500);
+
+makeRequest('/api', 0, requestData => updateDatabase(requestData));
+
+makeRequest('/api', undefined, requestData => updateDatabase(requestData));</code></pre>
+							</div>
+							<aside class="notes">
+								Ask students: What would the timeout value be? Point out that you can pass in <code>undefined</code>. However, <code>null</code> is a valid value so the function will use <code>null</code> instead of the default parameter.
+							</aside>
+						</section>
 				
 				<section>
 					<h2>Property Initializer Shorthand</h2>
@@ -575,6 +669,69 @@ console.log(name, active); // Whitney false</code></pre>
 					</div>
 					<aside class="notes">Ask: What do you think you'd use to set a default value? Similar patterns in ES6 — you can combine tons of different patterns/syntax, so try to give everything a shot.</aside>
 				</section>
+
+				<section>
+					<h2>Rest Parameters</h2>
+					<p class="fragment">Placing <code>...</code> <span class="green">before a function parameter</span> transforms that parameter and the <span class="blue">rest</span> (i.e. all following parameters) into an array</p>
+						<pre class="fragment small"><code class="javascript">function giveItARest(param1, ...allTheRest) {
+  console.log(param1); // 1
+  console.log(allTheRest); // [2, 3, 4, 5, 6]
+}
+			
+giveItARest(1, 2, 3, 4, 5, 6);
+</code></pre>
+						<p class="fragment">Useful when you don't know how many arguments will be passed to a function</p>
+						<aside class="notes">
+							Compress the <strong>rest</strong> into an array. To change a method name after deploying, when tons of existing apps are using a method by that name, e.g. changing calculateProduct() to multiply(). You can pass the call of one method to another and use the spread operator.
+						</aside>
+					</section>
+	
+			
+					<section>
+						<h2>Spread operator</h2>
+						<p>Placing <code>...</code> <span class="green">before an array</span> <span class="blue">spreads</span> the array into its individual elements</p>
+						<div class="fragment-progression">
+							<pre class="fragment small"><code class="javascript" contenteditable>const numbers = [2, 3, 4];
+			</code></pre>
+							<pre class="fragment small"><code class="javascript" contenteditable>const numbers = [2, 3, 4];
+			
+console.log([1, numbers]);</code></pre>
+							<pre class="fragment small"><code class="javascript" contenteditable>const numbers = [2, 3, 4];
+			
+console.log([1, numbers]); // nested array: [1, [2, 3, 4]]</code></pre>
+							<pre class="fragment small"><code class="javascript" contenteditable>const numbers = [2, 3, 4];
+			
+console.log([1, numbers]); // nested array: [1, [2, 3, 4]]
+			
+console.log([1, ...numbers]);</code></pre>
+							<pre class="fragment small"><code class="javascript" contenteditable>const numbers = [2, 3, 4];
+			
+console.log([1, numbers]); // nested array: [1, [2, 3, 4]]
+			
+console.log([1, ...numbers]); // normal array: [1, 2, 3, 4]</code></pre>
+						</div>
+			
+			
+						<aside class="notes">Ask what would the output be?</aside>
+			
+					</section>
+			
+					<section>
+						<h2>Rest vs. Spread</h2>
+						<p><code>...</code></p>
+						<p class="fragment"><span class="blue">Rest parameters</span>, primarily used in function parameters, to transform individual elements <span class="green">into an array</span></p>
+						<pre class="fragment"><code class="javascript">function sum(first, ...others) {
+  // others will be an array here
+}</code></pre>
+			
+						<p class="fragment"><span class="blue">Spread operator</span> used on an array to transform the array <span class="green">into individual elements</span></p>
+						<pre class="fragment"><code class="javascript">const arr1 = ['a', 'b', 'c'];
+const arr2 = ['x', 'y', 'z'];
+const combo = [...arr1, ...arr2];
+console.log(combo); // ['a', 'b', 'c', 'x', 'y', 'z']</code></pre>
+			
+						<aside class="notes">Ask: When you think "parameters", what do you think of? (function)</aside>
+					</section>
 
 
 			<section>
@@ -951,14 +1108,44 @@ console.log(sum); // 16</code></pre>
 				<h3>A Sandwich Metaphor</h3>
 				<p><img src="dist/img/sandwiches__map-reduce.jpg" alt="Map and Reduce with sandwiches" /></p>
 			</section>
-			
-			<section data-background="#029393">
-				<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
-			</section>
 
 			<section data-background="#029393">
-				<h1 style="color: #fafafa;"><span class="ordinal">( 5 )</span>A built-in helper for making AJAX requests</h1>					
+				<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>A built-in helper for making AJAX requests</h1>					
 			</section>
+
+			<section>
+					<h2>Fetch</h2>
+					<p class="fragment">The <code>fetch()</code> helper is used for AJAX requests</p>
+					<p class="fragment">The initial return value is the Response object; use chaining and the <code>.json()</code> method to get the JSON you need</p>
+		
+					<div class="fragment">
+						<pre><code class="javascript">fetch('http://json.com')
+  then(serverResponse => serverResponse.json())
+  .then(json => console.log(json))
+  .catch(err => console.log(err));</code></pre>
+						<p><a href="https://codepen.io/anythingcodes/pen/vZYaaa?editors=0010" target="_blank">Let's take a look &raquo;</a></p>
+					</div>
+					<aside class="notes">
+						Point out that the first return value is the response. Show that you need to call .json(), which returns another promise, to a second <code>then()</code>. Just a quirk of the Fetch API. Unlike standard promises, you can use then() and catch() to just process your request.
+					</aside>
+				</section>
+		
+				<section class="activity small" data-background="#007a7c">
+						<h2>Our Activity</h2>
+						<ul class="small">
+								<li>Slides: <a href="http://tiny.cc/wwces6" target="_blank">http://tiny.cc/wwces6</a></li>
+								<li>Be sure to grab an activity scorecard!</li>
+						</ul>
+						<div style="min-height:602px;position:relative;overflow:hidden;">
+							<p data-height="602" data-theme-id="0" data-slug-hash="xdGNZg" data-default-tab="result" data-user="anythingcodes" data-embed-version="2" data-pen-title="WWC ES6 Activity - Solution" class="codepen">See the Pen <a href="https://codepen.io/anythingcodes/pen/xdGNZg/">WWC ES6 Activity - Solution</a> by Liz Shaw (<a href="https://codepen.io/anythingcodes">@anythingcodes</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+						</div>
+						
+					</section>
+
+				<!-- <section>
+					<h2>Transpiling</h2>
+				</section> -->
+				
 
 			<section class="hide-pdf">
 				<h2>Questions</h2>
