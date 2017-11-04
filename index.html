@@ -433,7 +433,29 @@ obj.getName(); // Zeta</code></pre>
 					<aside class="notes">
 						Can't use <code>if</code> because that's a statement, not an expression. Ternary operators are expressions.
 					</aside>
-				</section>		
+				</section>
+				
+				<section>
+					<h2>Property Initializer Shorthand</h2>
+					<p class="fragment">When an object property name is the same as the local variable name, you can include the name without a colon and value</p>
+					<div class="clear small">
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES5:</h3>
+							<pre><code class="javascript">function saveData(url, data){
+  $.ajax({ method: 'POST', url: url, data: data });
+}</code></pre>
+							<p class="right small fragment">becomes</p>
+						</div>
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES6:</h3>
+							<pre><code class="javascript">function saveData(url, data){
+  $.ajax({ url, data, method: 'POST' });
+}</code></pre>
+						</div>
+					</div>
+					<p class="fragment">Sometimes referred to as <span class="blue">enhanced literal notation</span></p>
+					<aside class="notes">Convention is to place shorthanded properties at beginning for readability. This example uses jQuery, but you don't need to know it; it's just an example.</aside>
+				</section>
 				
 				<section data-background="#029393">
 					<h1 style="color: #fafafa;"><span class="ordinal">( 3 )</span>New functionality for working with arrays and objects</h1>					
