@@ -461,6 +461,121 @@ obj.getName(); // Zeta</code></pre>
 					<h1 style="color: #fafafa;"><span class="ordinal">( 3 )</span>New functionality for working with arrays and objects</h1>					
 				</section>
 
+				<section>
+					<h2>Destructuring Objects</h2>
+					<p>Unpack properties from objects into distinct variables</p>
+					<div class="clear small">
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES5:</h3>
+							<pre><code class="javascript">var person = {
+  name: 'Whitney',
+  age: 38
+};
+		
+var name = person.name;
+var age = person.age;
+		
+console.log(name, age); // Whitney 38</code></pre>
+							<p class="right small fragment">becomes</p>
+						</div>
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES6:</h3>
+							<pre><code class="javascript">const person = {
+  name: 'Whitney',
+  age: 38
+};
+		
+const { name, age } = person;
+console.log(name, age); // Whitney 38</code></pre>
+						</div>
+					</div>
+					<ul class="">
+						<li class="fragment"><span class="green">Left-hand side of the equal sign (<code>=</code>)</span><br />A comma-separated list of the object's keys you'd like to unpack, wrapped in <code>{ }</code></li>
+						<li class="fragment"><span class="green">Right-hand side of the equal sign (<code>=</code>)</span><br />The object you're destructuring</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Assigning to Different Local Variable Names</h2>
+					<p class="fragment">How to use a different name for your destructured variables</p>
+					<div class="fragment-progression">
+						<pre class="fragment"><code class="javascript">const { name, age } = person;</code></pre>
+						<pre class="fragment"><code class="javascript">const { name, age } = person;
+const localName = name;
+// localName is the variable name I want to use going forward</code></pre>
+					</div>
+					<p>&nbsp;</p>
+					<ol class="clear small">
+						<li class="fragment">Use a <code>:</code> in the comma-separated list of keys</li>
+						<li class="fragment">The <span class="green">variable name after <code>:</code></span> can now be referenced as a local variable</li>
+					</ol>
+					<p>&nbsp;</p>
+					<pre class="fragment"><code class="javascript">const { name : localName, age } = person;
+// now I can reference localName going forward!</code></pre>
+				</section>
+		
+				<section>
+					<h2>Destructuring Arrays</h2>
+					<p>Array destructuring operates on <span class="green">positions within an array</span> rather than any named properties</p>
+					<div class="clear small">
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES5:</h3>
+							<pre><code class="javascript">var colors = ['red', 'green', 'blue'];
+		
+var first = colors[0];
+var second = colors[1];
+var third = colors[2];
+		
+console.log(first, second, third);
+// red green blue</code></pre>
+							<p class="right small fragment">becomes</p>
+						</div>
+						<div class="halfblock fragment">
+							<h3 class="green underlined">ES6:</h3>
+							<pre><code class="javascript">const colors = ['red', 'green', 'blue'];
+		
+const [ first, second, third ] = colors;
+		
+console.log(first, second, third);
+// red green blue</code></pre>
+						</div>
+					</div>
+					<ul class="">
+						<li class="fragment"><span class="green">Left-hand side of the equal sign (<code>=</code>)</span><br />A comma-separated list of the values you'd like to unpack, wrapped in <code>[]</code></li>
+						<li class="fragment"><span class="green">Right-hand side of the equal sign (<code>=</code>)</span><br />The array you're destructuring</li>
+					</ul>
+				</section>
+
+				<section>
+						<h2>Default Destructuring Values</h2>
+						<p class="fragment">Set a default value with equal signs (<code>=</code>). This works when destructuring objects and arrays.</p>
+						<h3 class="small fragment blue" style="margin-top: 1em;">An example with objects:</h3>
+						<div class="clear small">
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES5:</h3>
+								<pre><code class="javascript">var person = {
+  name: 'Whitney'
+};
+			
+var name = person.name;
+var active = person.active; // undefined
+			
+console.log(name, active); // Whitney undefined</code></pre>
+								<p class="right small fragment">becomes</p>
+							</div>
+							<div class="halfblock fragment">
+								<h3 class="green underlined">ES6:</h3>
+								<pre><code class="javascript">const person = {
+  name: 'Whitney'
+};
+			
+const { name, active = false } = person;
+console.log(name, active); // Whitney false</code></pre>
+							</div>
+						</div>
+						<aside class="notes">Ask: What do you think you'd use to set a default value? Similar patterns in ES6 — you can combine tons of different patterns/syntax, so try to give everything a shot.</aside>
+					</section>
+			
 				
 				<section data-background="#029393">
 					<h1 style="color: #fafafa;"><span class="ordinal">( 4 )</span>Write more succinct methods with better error handling</h1>					
