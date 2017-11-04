@@ -906,29 +906,19 @@ console.log(sum); // 18
 				</div>
 				<aside class="notes">
 					Activity on this slide: Ask class to arrow functionitize the right-hand ES6 block. We saved the weirdest and hardest one for last. But it's the most flexible since you can return any type of object you want &mdash; integer, object with keys, array, anything. One crucial difference is you MUST pass an initial value to reduce.
+
+
+					<p class="fragment">reduce is <span class="orange">slightly different</span> from the other array helpers because it takes <span class="green">two parameters</span>:</p>
+					<ol>
+						<li><code>iteratorFunction</code>
+							<ul>
+								<li>The iterator function requires a <code>calculatedValue</code> parameter, which is modified each time and <span class="green">returned each iteration</span></li>
+							</ul>
+						</li>
+						<li><code>initialValue</code> &mdash; used during the first iteration to calculate the next iteration's <code>calculatedValue</code></li>
+					</ol>
+
 				</aside>
-			</section>
-
-			<section>
-				<h2>reduce</h2>
-				<pre class="small"><code class="javascript">// when iteratorFunction is a reference:
-arr.reduce(iteratorFunction, initialValue);
-
-// or when iteratorFunction isn't a reference:
-arr.reduce((calculatedValue, element, index, array) => { }, initialValue);</code></pre>
-				<p>&nbsp;</p>
-				<p class="fragment">reduce is <span class="orange">slightly different</span> from the other array helpers because it takes <span class="green">two parameters</span>:</p>
-				<ol>
-					<li class="fragment"><code>iteratorFunction</code>
-						<ul>
-							<li class="fragment">The iterator function requires a <code>calculatedValue</code> parameter, which is modified each time and <span class="green">returned each iteration</span></li>
-						</ul>
-					</li>
-					<li class="fragment"><code>initialValue</code> &mdash; used during the first iteration to calculate the next iteration's <code>calculatedValue</code></li>
-				</ol>
-
-				<aside class="notes">Ask students what parts of the call are similar to other array helpers and what are different.</aside>
-
 			</section>
 
 			<section>
