@@ -10,6 +10,10 @@ A workshop for Women Who Code Boston on [November 8, 2017](https://www.meetup.co
 2. Run `npm start`
 3. A new tab will open with the slides
 
+## Workshop Activity
+
+[View activity instructions](https://docs.google.com/document/d/1hl4YT-3z5WLDhnppy2DlbqLpFQ7AQxqjJf5AGtYWeQQ/edit?usp=sharing)
+
 ## Instructor Reference
 
 [View Instructor Plans](instructor-plans.md)
