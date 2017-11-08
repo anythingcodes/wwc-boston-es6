@@ -1213,11 +1213,91 @@ console.log(square.getArea()); // 25</code></pre>
 				</section> -->
 				
 
+				<section data-background="#029393">
+						<h1 style="color: #fafafa;">Additional Resources</h1>					
+					</section>
+
+					<section>
+							<h3><span class="green">Transpiling</span> = Transformation + Compiling</h2>
+							<img src="dist/img/transpiling.svg" alt="Transpiling" style="max-height: 90px;" />
+							<div class="transpiler clear">
+								<div class="halfblock">
+									<h3 class="green">Before: ES6</h3>
+									<pre><code contenteditable class ="javascript transpiler__input">const getMessage = () => 'Hello World';</code></pre>
+								</div>
+								<div class="halfblock">
+									<h3 class="green">After: ES5</h3>
+									<pre><code class="javascript transpiler__output">Waiting...</code></pre>
+								</div>
+							</div>
+							<p>&nbsp;</p>
+							<ul class="">
+								<li><a href="http://www.javascripttutorial.net/es6/setting-es6-project-using-babel/" target="_blank">Setting Up an ES6 Project Using Babel for Beginners &raquo;</a><br />
+									<span class="small">(Note: use <code>babel-preset-env</code> instead of <code>babel-preset-latest</code>)</span>
+								</li>
+								<li><a href="https://css-tricks.com/transpiling-es6/" target="_blank">Transpiling ES6 using Gulp &raquo;</a><br />
+									<span class="small">(Note: use <code>babel-preset-env</code> instead of <code>babel-preset-es2015</code>)</span>
+								</li>
+								<li>
+									<a href="http://babeljs.io/docs/setup/" target="_blank">Official Babel Setup Docs &raquo;</a>
+								</li>
+							</ul>
+							<aside class="notes">Point out how this code block is being transpiled to that via Babel. Break the ES6 code as an example. Ask who's seen a <code>src</code> and <code>dist</code> folder. Both of these are creating a function that returns 'Hello World'. You and your team can focus on writing readable, less error-prone code in fewer lines. Enforces good coding practices behind the scenes (<code>'use strict';</code>). Allows you to focus on writing readable code in less lines. Build tools (e.g. WebPack) integrate nicely with this workflow and can be used to minify the ES5 result, add linting, add prefixes to CSS automatically, etc. [[[Browsers don’t yet implement natively a lot of ES6+ features, and developers want to innovate on what JavaScript is. This means they’ve built tools like Babel that implement futuristic JavaScript features and compile down to ES5.]]]
+							</aside>
+						</section>
+
+						<section>
+								<h2>Additional Resources</h2>
+								<div class="clear">
+									
+									<div class="halfblock small">
+										<h6>Challenges &amp; Exercises</h6>
+										<ul>
+											<li><a href="http://tiny.cc/gdies6" target="_blank">Girl Develop It ES6 Slides, Challenges, and Exercises (with solutions)</a></li>
+											<li><a href="http://es6katas.org/" target="_blank">ES6 Katas</a>: Learn ES6 by doing it</li>
+											<li><a href="http://marijnhaverbeke.nl/talks/es6_falsyvalues2015/exercises/">ES6 Sandbox</a></li>
+											<li><a href="http://hackerrank.com">HackerRank</a></li>
+											<li><a href="http://interviewcake.com">InterviewCake</a></li>
+										</ul>
+					
+										<p>&nbsp;</p>
+										<h6>Cheatsheets</h6>
+										<ul>
+											<li><a href="https://github.com/anythingcodes/gdi-es6-javascript/tree/gh-pages/resources/cheatsheets" target="_blank">Course Cheatsheets</a></li>
+											<li><a href="https://github.com/bevacqua/es6" target="_blank">ES6 Overview in 350 Bullet Points</a></li>
+											<li><a href="https://codetower.github.io/es6-features/" target="_blank">Interactive ES6 Features List</a></li>
+											<li><a href="https://github.com/DrkSephy/es6-cheatsheet" target="_blank">DrkSephy's ES6 Cheatsheet</a></li>
+										</ul>
+									</div>
+					
+									<div class="halfblock small">
+										<h6>Books</h6>
+										<ul>
+											<li><a href="http://a.co/3Z9KWEr" target="_blank">Beautiful JavaScript</a></li>
+											<li><a href="http://a.co/bG5R4N8" target="_blank">Understanding ECMAScript 6</a></li>
+										</ul>
+					
+										<p>&nbsp;</p>
+					
+										<h6>Keeping in the Loop</h6>
+										<ul>
+											<li><a href="http://2ality.com/" target="_blank">2ality</a></li>
+											<li><a href="https://ponyfoo.com/" target="_blank">PonyFoo</a></li>
+											<li><a href="https://medium.com/" target="_blank">Medium</a> and <a href="http://youtube.com">YouTube</a> channels</li>
+											<li>Meetups: Women Who Code, Node.JS Boston, Tech Ladies, BostonJS, Girl Develop It, etc.</li>
+										</ul>
+									</div>
+					
+								</div>
+					
+							</section>
+
 			<section class="hide-pdf">
 				<h2>Questions</h2>
-				<div style="font-size:1200%; height:100%;" class="blue">?
-					<div class="clear"></div>
+				<div style="font-size:1500%;line-height:0.9" class="blue">?
 				</div>
+				<p class="small"><a href="mailto:liz@hubspot.com">liz@hubspot.com</a> // <a href="http://linkedin.com/in/lizhelene">linkedin.com/in/lizhelene</a></p>
+				
 				<aside class="notes">Can always email me!</aside>
 			</section>
 
